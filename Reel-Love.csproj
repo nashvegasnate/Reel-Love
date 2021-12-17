@@ -1,22 +1,13 @@
-<<<<<<< HEAD
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-=======
-<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
->>>>>>> 73e5c425dd74fc4b869c009daa61f7406c4307bc
     <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>Reel_Love</RootNamespace>
   </PropertyGroup>
 
-<<<<<<< HEAD
+
   <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
   </ItemGroup>
 
-=======
->>>>>>> 73e5c425dd74fc4b869c009daa61f7406c4307bc
 </Project>
