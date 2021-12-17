@@ -23,17 +23,5 @@ namespace Reel_Love
             {
               webBuilder.UseStartup<Startup>();
             });
-=======
-﻿using System;
-
-namespace Reel_Love
-{
-  class Program
-  {
-    static void Main(string[] args)
-    {
-      Console.WriteLine("Hello World!");
-    }
->>>>>>> 73e5c425dd74fc4b869c009daa61f7406c4307bc
   }
 }
