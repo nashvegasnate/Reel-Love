@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Reel_Love.Models
 {
-  public class Users
+  public class User
   {
     public int Id { get; set; }
     public string FirstName { get; set; }
