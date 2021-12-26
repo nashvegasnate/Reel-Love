@@ -5,7 +5,7 @@ import {
   Button
 } from 'reactstrap';
 import { signInUser, signOutUser } from '../helpers/auth';
-import TitleSearchForm from '../components/TitleSearchForm';
+import TitleSearchBar from '../components/TitleSearchBar';
 // import UserInfoCard from '../components/UserInfo';
 
 function Home({ user, setMovie }) {
@@ -32,7 +32,7 @@ function Home({ user, setMovie }) {
         </div>
       <div className='col-lg-12'>
           <h1>Search A Movie Title</h1>
-        <TitleSearchForm
+        <TitleSearchBar
           user={user}
           setMovie={setMovie}
         />
@@ -43,7 +43,7 @@ function Home({ user, setMovie }) {
 
 Home.propTypes = {
   user: PropTypes.any,
-  setMovie: PropTypes.func.isRequired
+  setMovie: PropTypes.func
 };
 
 export default Home;

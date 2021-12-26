@@ -20,12 +20,13 @@ const NavBar = ({ user }) => {
   const authenticated = () => (
     <>
       <NavItem>
-        <Link className="nav-link" to="/">whatever</Link>
+        <Link className="nav-link" to="/">New List</Link>
       </NavItem>
       <NavItem>
-        <Link className="nav-link" to="/">
-          Link Name 2
-        </Link>
+        <Link className="nav-link" to="/">My Lists</Link>
+      </NavItem>
+      <NavItem>
+        <Link className="nav-link" to="/">Users</Link>
       </NavItem>
     </>
   );

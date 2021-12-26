@@ -29,6 +29,7 @@ function MovieCard({
           <CardText>Year: {year}</CardText>
           <CardText>Poster : {poster}</CardText>
           <CardText>Plot: {plot}</CardText>
+          <CardText>User: {user.userName}</CardText>
         </CardBody>
       </MovieCard>  
     </div>

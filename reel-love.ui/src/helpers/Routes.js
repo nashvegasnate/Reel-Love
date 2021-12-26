@@ -22,12 +22,13 @@ PrivateRoute.propTypes = {
   user: PropTypes.any,
 };
 
-function Routes({ user }) {
+function Routes({ user, setMovie }) {
   return (
     <div>
       <Switch>
         <Route exact path='/' component={() => <Home
           user={user}
+          setMovie={setMovie}
           />} />
         {/* <PrivateRoute
           exact
@@ -51,6 +52,7 @@ function Routes({ user }) {
 
 Routes.propTypes = {
   user: PropTypes.any,
+  setMovie: PropTypes.any
 };
 
 export default Routes;
