@@ -24,10 +24,9 @@ const signInUser = () => {
         image_Url: user.user?.photoURL,
         firebase_Uid: user.user?.uid,
         email: user.user?.email,
-      }
-
+      };
       // addthe user to your api and database- axios call to post user to api and database
-
+      //createUser(userInfo).then(setUser); -need to create userData file for api calls
     // sends you back to home screen
       window.location.href = '/';
     }
