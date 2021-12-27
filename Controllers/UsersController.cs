@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Reel_Love.Data_Access;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Reel_Love.Controllers
 {
@@ -20,10 +21,11 @@ namespace Reel_Love.Controllers
       _repo = repo;
     }
 
+    [AllowAnonymous]
     [HttpGet]
-    public List<User> GetAllUsers()
+    public IActionResult GetAllUsers()
     {
-      return _repo.GetAllUsers();
+      return Ok(_repo.GetAllUsers());
     }
 
     [HttpGet("{Id}")]
@@ -44,6 +46,7 @@ namespace Reel_Love.Controllers
     //  return (IEnumerable<User>)_repo.GetUserByNameFromDB(firstName);
     //}
 
+    [AllowAnonymous]
     [HttpPost]
     public IActionResult AddUser(User newUser)
     {
@@ -53,7 +56,21 @@ namespace Reel_Love.Controllers
       }
       _repo.Add(newUser);
 
-      return Created("api/users/1", newUser);
+      return Created("api/users/{newUser.Id}", newUser);
+    }
+
+    [AllowAnonymous]
+    [HttpPut("{Id}")]
+    public IActionResult UpdateUser(int Id, User user)
+    {
+      var userToUpdate = _repo.GetUserById(Id);
+
+      if (userToUpdate == null)
+        return NotFound($"Could not locate a user with that ID: {Id} for updating.");
+
+      var updatedUser = _repo.UpdateUser(Id, user);
+
+      return Ok(updatedUser);
     }
 
     [HttpDelete]

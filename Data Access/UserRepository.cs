@@ -62,6 +62,23 @@ namespace Reel_Love.Data_Access
       newUser.Id = id;
     }
 
+    internal object UpdateUser(int Id, User user)
+    {
+      using var db = new SqlConnection(_connectionString);
+
+      var sql = @"Update USERS
+                    SET
+                    FirstName = @FirstName,
+                    LastName = @LastName
+                  Output Inserted.*
+                  Where id= @Id";
+
+      user.Id = Id;
+      var updatedUser = db.QuerySingleOrDefault<User>(sql, user);
+
+      return updatedUser;
+    }
+
     internal void Remove(int id)
     {
       using var db = new SqlConnection(_connectionString);
