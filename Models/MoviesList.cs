@@ -10,5 +10,6 @@ namespace Reel_Love.Models
     public int Id { get; set; }
     public int MoviesId { get; set; }
     public int ListsId { get; set; }
+    public string ListName { get; set; }
   }
 }
