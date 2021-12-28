@@ -22,9 +22,10 @@ namespace Reel_Love.Data_Access
     {
       using var db = new SqlConnection(_connectionString);
 
-      var usersList = db.Query<UsersList>
-                  (@"SELECT * 
-                      FROM UsersList");
+      var sql = @"SELECT * 
+                  FROM UsersList";
+
+      var usersList = db.Query<UsersList>(sql);
 
       return usersList;
     }
@@ -36,7 +37,7 @@ namespace Reel_Love.Data_Access
                   FROM UsersList
                   WHERE id = @Id";
 
-      var usersList = db.QuerySingleOrDefault<UsersList>(sql, id);
+      var usersList = db.QuerySingleOrDefault<UsersList>(sql, new { id });
 
       return usersList;
     }
@@ -48,7 +49,7 @@ namespace Reel_Love.Data_Access
                   FROM UsersList
                   WHERE usersId = @usersId";
 
-      var usersList = db.QuerySingleOrDefault<UsersList>(sql, UsersId);
+      var usersList = db.QuerySingleOrDefault<UsersList>(sql, new { UsersId });
 
       return usersList;
     }
@@ -60,7 +61,7 @@ namespace Reel_Love.Data_Access
                   FROM UsersList
                   WHERE partnerId = @PartnerId";
 
-      var usersList = db.QuerySingleOrDefault<UsersList>(sql, PartnerId);
+      var usersList = db.QuerySingleOrDefault<UsersList>(sql, new { PartnerId });
 
       return usersList;
     }
@@ -88,13 +89,13 @@ namespace Reel_Love.Data_Access
       db.Execute(sql, new { Id });
     }
 
-    internal UsersList UpdateUsersList(int Id, UsersList usersList)
+    internal object Update(int Id, UsersList usersList)
     {
       using var db = new SqlConnection(_connectionString);
 
       var sql = @"UPDATE UsersList
-                  SET UsersId = @UsersId
-                      PartnerId = @PartnerId
+                  SET UsersId = @UsersId,
+                      PartnerId = @PartnerId,
                       ListTitle = @ListTitle
                   OUTPUT INSERTED.*
                   WHERE Id = @Id";
