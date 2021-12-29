@@ -8,6 +8,8 @@ import MovieCard from '../components/MovieCard';
 
 function TitleSearchBar({ user }) {
   const [searchResult, setSearchResult] = useState([]);
+  // OR should it be an object?
+  //const [searchResult, setSearchResult] = useState({});
   const [searchTitle, setSearchTitle] = useState('');
 
   // const handleInputChange = (e) => {
