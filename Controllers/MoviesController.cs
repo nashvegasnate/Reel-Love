@@ -26,10 +26,10 @@ namespace Reel_Love.Controllers
       return _repo.GetAllMovies();
     }
 
-    [HttpGet("GetMovieByID/{ImdbID}")]
-    public List<Movie> GetMovieByID(string ImdbID)
+    [HttpGet("GetMovieByImdbID/{ImdbID}")]
+    public List<Movie> GetMovieByImdbID(string ImdbID)
     {
-      return _repo.GetMovieByID(ImdbID);
+      return _repo.GetMovieByImdbID(ImdbID);
     }
 
     [HttpGet("GetMovieByTitle/{Title}")]
@@ -37,5 +37,21 @@ namespace Reel_Love.Controllers
     {
       return _repo.GetMovieByTitle(Title);
     }
+
+    [HttpGet("GetMovieById/{Id}")]
+    public List<Movie> GetMovieById(int Id)
+    {
+      return _repo.GetMovieById(Id);
+    }
+
+    [HttpGet("getMoviesByListsId/{Id}")]
+    public IActionResult GetMoviesByListsId(int Id)
+    {
+      var moviesList = _repo.getMoviesByListsId(Id);
+      if (moviesList is null) return NotFound($"That List Does Not Exist.");
+      return Ok(moviesList);
+    }
+
+
   }
 }

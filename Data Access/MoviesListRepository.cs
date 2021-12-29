@@ -17,5 +17,30 @@ namespace Reel_Love.Data_Access
     {
       _connectionString = config.GetConnectionString("Reel-Love");
     }
+
+    internal IEnumerable<MoviesList> GetAll()
+    {
+      using var db = new SqlConnection(_connectionString);
+
+      var sql = @"SELECT * 
+                  FROM MoviesList";
+
+      var moviesList = db.Query<MoviesList>(sql);
+
+      return moviesList;
+    }
+
+    internal MoviesList getMoviesListById(int id)
+    {
+      using var db = new SqlConnection(_connectionString);
+      var sql = @"SELECT *
+                  FROM MoviesList
+                  WHERE id = @Id";
+
+      var moviesList = db.QuerySingleOrDefault<MoviesList>(sql, new { id });
+
+      return moviesList;
+    }
+
   }
 }

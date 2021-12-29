@@ -40,12 +40,6 @@ namespace Reel_Love.Controllers
       return Ok(user);
     }
 
-    //[HttpGet("GetUserByNameFromDB/{firstName}")]
-    //public IEnumerable<User> GetUserFirstNameFromList(string firstName)
-    //{
-    //  return (IEnumerable<User>)_repo.GetUserByNameFromDB(firstName);
-    //}
-
     [AllowAnonymous]
     [HttpPost]
     public IActionResult AddUser(User newUser)

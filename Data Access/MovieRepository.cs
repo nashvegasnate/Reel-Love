@@ -32,14 +32,34 @@ namespace Reel_Love.Data_Access
       return _movies;
     }
 
-    internal List<Movie> GetMovieByID(string ImdbID)
+    internal List<Movie> GetMovieByImdbID(string ImdbID)
     {
       return _movies.Where(Movie => Movie.ImdbID == ImdbID).ToList();
+    }
+
+    internal List<Movie> GetMovieById(int Id)
+    {
+      return _movies.Where(Movie => Movie.Id == Id).ToList();
     }
 
     internal List<Movie> GetMovieByTitle(string Title)
     {
       return _movies.Where(Movie => Movie.Title == Title).ToList();
+    }
+
+    //retrieves list of movies on each list 
+    internal IEnumerable<Movie> getMoviesByListsId(int ListsId)
+    {
+      using var db = new SqlConnection(_connectionString);
+      var sql = @"SELECT m.Id, ImdbID, Title, Genre, Runtime, [Year], Poster, Plot
+                  FROM Movies m
+                  JOIN MoviesList ml
+                  ON m.Id = ml.MoviesId
+                  WHERE ml.ListsId = @ListsId";
+
+      var moviesList = db.Query<Movie>(sql, new { ListsId });
+
+      return moviesList;
     }
   }
 }
