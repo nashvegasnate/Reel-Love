@@ -6,10 +6,10 @@ import {
 import getMovieTitle from '../helpers/data/moviesData';
 import MovieCard from '../components/MovieCard';
 
-function TitleSearchBar({ user }) {
-  const [searchResult, setSearchResult] = useState([]);
+function TitleSearchBar({ user, setMovie }) {
+  //const [searchResult, setSearchResult] = useState([]);
   // OR should it be an object?
-  //const [searchResult, setSearchResult] = useState({});
+  const [searchResult, setSearchResult] = useState({});
   const [searchTitle, setSearchTitle] = useState('');
 
   // const handleInputChange = (e) => {
@@ -25,8 +25,8 @@ function TitleSearchBar({ user }) {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    console.warn(searchTitle);
     getMovieTitle(searchTitle).then((response) => {
+      console.warn(searchResult);
       setSearchResult(response);
       setSearchTitle(''); //clears input fields
     });
@@ -60,18 +60,18 @@ function TitleSearchBar({ user }) {
             poster={searchResult.poster}
             plot={searchResult.plot}
             user={user}
-            //setMovie={setMovie}
+            setMovie={setMovie}
           />
-        )}
+        )} 
       </div>
     </div>
   );
 }
 
 TitleSearchBar.propTypes = {
-  user: PropTypes.any.isRequired,
+  user: PropTypes.any,
   // movie: PropTypes.object,
-  // setMovie: PropTypes.any
+  setMovie: PropTypes.any
 };
 
 export default TitleSearchBar;

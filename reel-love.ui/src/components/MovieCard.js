@@ -45,7 +45,7 @@ MovieCard.propTypes = {
   poster: PropTypes.any.isRequired,
   plot: PropTypes.any.isRequired,
   setMovie: PropTypes.any.isRequired,
-  user: PropTypes.any.isRequired
+  user: PropTypes.any
 };
 
 export default MovieCard;
