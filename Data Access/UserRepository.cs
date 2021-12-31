@@ -31,17 +31,36 @@ namespace Reel_Love.Data_Access
       return _users;
     }
 
-    internal IEnumerable<User> GetUserById(int Id)
+    //internal IEnumerable<User> GetUserById(int Id)
+    //{
+    //  return _users.Where(user => user.Id == Id);
+    //}
+
+    internal User GetUserById(int Id)
     {
-      return _users.Where(user => user.Id == Id);
+      using var db = new SqlConnection(_connectionString);
+
+      var sql = @"SELECT *
+                  FROM USERS
+                  WHERE Id = @Id";
+
+      var user = db.QuerySingleOrDefault<User>(sql, new { Id });
+
+      return user;
     }
 
-    //internal User GetUserById(int Id)
-    //{
-    //  using var db = new SqlConnection(_connectionString);
-    //  var user = db.QueryFirstOrDefault<User>("SELECT * FROM USERS WHERE Id = @Id", new { Id });
-    //  return user;
-    //}
+    internal User GetUserByFbId(string FirebaseId)
+    {
+      using var db = new SqlConnection(_connectionString);
+
+      var sql = @"SELECT *
+                  FROM User
+                  WHERE FirebaseId = @FirebaseId";
+
+      var user = db.QuerySingleOrDefault<User>(sql, new { FirebaseId });
+
+      return user;
+    }
 
     //internal User GetUserByNameFromDB(string firstName)
     //{

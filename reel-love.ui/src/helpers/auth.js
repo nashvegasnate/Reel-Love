@@ -1,5 +1,6 @@
 import firebase from 'firebase/compat/app';
 import axios from 'axios';
+import { createUser } from '../helpers/data/usersData';
 
 // create something that modifies a request as it goes out, 
 // adding a header to it with the token
@@ -25,8 +26,9 @@ const signInUser = () => {
         firebase_Uid: user.user?.uid,
         email: user.user?.email,
       };
-      // addthe user to your api and database- axios call to post user to api and database
-      //createUser(userInfo).then(setUser); -need to create userData file for api calls
+      // add the user to your api and database- axios call to post user to api and database
+    createUser(userInfo).then(setUser);
+    
     // sends you back to home screen
       window.location.href = '/';
     }

@@ -33,20 +33,49 @@ namespace Reel_Love.Controllers
       return Ok(_repo.GetAll());
     }
 
-    //[HttpGet("getMoviesByListsId/{ListsId}")]
-    //public IActionResult GetMoviesByListsId(int ListsId)
+    [HttpPost]
+    public IActionResult CreateNewMoviesList(MoviesList newMoviesList)
+    {
+     
+      _repo.CreateNewMoviesList(newMoviesList);
+
+      return Created($"api/moviesList/{newMoviesList.ListsId}", newMoviesList);
+    }
+
+    [HttpDelete]
+    public IActionResult DeleteMoviesList(int ListsId)
+    {
+      _repo.Remove(ListsId);
+
+      return Ok();
+    }
+
+    //[HttpGet("{ListsId}")]
+    //public IActionResult GetMoviesListByListsId(int ListsId)
     //{
-    //  var moviesList = _repo.getMoviesByListsId(ListsId);
-    //  _movieRepo.GetMovieById(ListsId);
+    //  var moviesList = _repo.GetMoviesListByListsId(ListsId);
 
     //  if (moviesList == null)
     //  {
-    //    return NotFound($"No List With That ID Exists.");
+    //    return NotFound($"No List With ID of {ListsId} Exists.");
     //  }
 
     //  return Ok(moviesList);
     //}
-  }
 
-  
+    //[HttpPut("{ListsId}")]
+    //public IActionResult UpdateMoviesList(int ListsId, MoviesList moviesList)
+    //{
+    //  var listToUpdate = _repo.GetMoviesListByListsId(ListsId);
+
+    //  if (listToUpdate == null)
+    //    return NotFound($"Could not locate a list with that ID: {ListsId} for updating.");
+
+    //  var updatedList = _repo.UpdateMoviesList(ListsId, moviesList);
+
+    //  return Ok(updatedList);
+    //}
+
+
+  }
 }

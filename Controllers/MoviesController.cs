@@ -52,6 +52,13 @@ namespace Reel_Love.Controllers
       return Ok(moviesList);
     }
 
+    [HttpGet("getMoviesOnListByListName/{ListName}")]
+    public IActionResult getMoviesOnListByListName(string ListName)
+    {
+      var moviesList = _repo.getMoviesOnListByListName(ListName);
+      if (moviesList is null) return NotFound($"That List Does Not Exist.");
+      return Ok(moviesList);
+    }
 
   }
 }

@@ -40,6 +40,19 @@ namespace Reel_Love.Controllers
       return Ok(user);
     }
 
+    [HttpGet("GetUserByFbId/{FirebaseId}")]
+    public IActionResult GetUserByFbId(string FirebaseId)
+    {
+      var user = _repo.GetUserByFbId(FirebaseId);
+
+      if (user == null)
+      {
+        return NotFound($"No User With That FirebaseId Exists.");
+      }
+
+      return Ok(user);
+    }
+
     [AllowAnonymous]
     [HttpPost]
     public IActionResult AddUser(User newUser)
@@ -50,7 +63,7 @@ namespace Reel_Love.Controllers
       }
       _repo.Add(newUser);
 
-      return Created("api/users/{newUser.Id}", newUser);
+      return Created($"api/users/{newUser.Id}", newUser);
     }
 
     [AllowAnonymous]
