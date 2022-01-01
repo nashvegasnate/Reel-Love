@@ -60,5 +60,19 @@ namespace Reel_Love.Controllers
       return Ok(moviesList);
     }
 
+    [HttpPost]
+    public IActionResult AddMovieToDb(Movie movie)
+    {
+      _repo.Add(movie);
+      return Created($"/movie/{movie.Id}", movie);
+    }
+
+    [HttpDelete]
+    public IActionResult DeleteMovieFromDb(string ImdbID)
+    {
+      _repo.Remove(ImdbID);
+
+      return Ok();
+    }
   }
 }

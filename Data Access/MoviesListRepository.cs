@@ -65,6 +65,50 @@ namespace Reel_Love.Data_Access
       db.Execute(sql, new { ListsId });
     }
 
+    //internal MoviesList AddMovieToList(int ListsId, NewMovieOnList addedMovie)
+    //{
+    //  var db = new SqlConnection(_connectionString);
+
+    //  //find the user to grab the list
+    //  var userSql = @"SELECT *
+    //                  FROM Users
+    //                  WHERE Id = @Id";
+
+    //  var userList = db.QueryFirstOrDefault<User>(userSql, new { ListsId });
+
+    //  //use the User to find their list
+    //  var listToUpdateSql = @"SELECT ListsId
+    //                          FROM MoviesList ml
+    //                          JOIN UsersList ul
+    //                          ON ul.UsersId = ml.ListsId
+    //                          WHERE ml.ListsId = @ml.ListsId";
+
+    //  var listToUpdate = db.QueryFirstOrDefault<MoviesList>(listToUpdateSql, new { ListsId });
+
+    //  var listId = listToUpdate.ListsId;
+
+    //  //get the movies currently on the list so we can add to it
+    //  var currentMoviesListSql = @"SELECT *
+    //                               FROM MoviesList
+    //                               WHERE ListsId = @ListsId";
+
+    //  var currentListDetails = db.Query<MoviesList>(currentMoviesListSql, new { ListsId }).ToList();
+      
+    //  //local list that is being created to push current movies and new movie
+    //  var currentMoviesList = new List<NewList>
+    //}
+
+    //internal void AddMovieToList(Movie movie)
+    //{
+    //  using var db = new SqlConnection(_connectionString);
+
+    //  var sql =@"INSERT INTO MoviesList" 
+    //}
+
+
+
+
+
     //internal object UpdateMoviesList(int ListsId, MoviesList moviesList)
     //{
     //  using var db = new SqlConnection(_connectionString);

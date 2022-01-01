@@ -75,5 +75,32 @@ namespace Reel_Love.Data_Access
 
       return moviesList;
     }
+
+    internal int Add(Movie movie)
+    {
+      using var db = new SqlConnection(_connectionString);
+
+      var sql = @"INSERT INTO Movies
+                  (ImdbID, Title, Genre, Runtime, Year, Poster, Plot)
+                  OUTPUT INSERTED.Id
+                  VALUES
+                  (@ImdbID, @Title, @Genre, @Runtime, @Year, @Poster, @Plot)";
+
+      var id = db.ExecuteScalar<int>(sql, movie);
+
+      movie.Id = id;
+
+      return id;
+    }
+
+    internal void Remove(string ImdbID)
+    {
+      using var db = new SqlConnection(_connectionString);
+      var sql = @"DELETE
+                  FROM Movies
+                  WHERE ImdbID = @ImdbID";
+
+      db.Execute(sql, new { ImdbID });
+    }
   }
 }
