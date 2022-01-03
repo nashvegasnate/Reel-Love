@@ -59,6 +59,27 @@ namespace Reel_Love.Controllers
       return Ok();
     }
 
+    // MOVED TO MOVIES CONTROLLER
+    //[HttpGet("/GetAllMoviesOnAListById/{Id}")]
+    //public IActionResult GetAllMoviesOnAListById(Guid Id)
+    //{
+    //  var movieList = _repo.GetAllMoviesOnAListById(Id);
+
+    //  if (movieList == null)
+    //  {
+    //    return NotFound($"No list with the ID of {Id} exists.");
+    //  }
+
+    //  return Ok(movieList);
+    //}
+
+
+    [HttpPut("/addMovieToList/{userID}")]
+    public MoviesList AddToList(Guid userID, NewList listMovie)
+    {
+      return _repo.AddToList(userID, listMovie);
+    }
+
 
   }
 }

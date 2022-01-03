@@ -1,110 +1,110 @@
-﻿using Reel_Love.Models;
-using Dapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Data.SqlClient;
+﻿//using Reel_Love.Models;
+//using Dapper;
+//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Threading.Tasks;
+//using Microsoft.Extensions.Configuration;
+//using Microsoft.Data.SqlClient;
 
-namespace Reel_Love.Data_Access
-{
-  public class UsersListRepository
-  {
-    readonly string _connectionString;
+//namespace Reel_Love.Data_Access
+//{
+//  public class UsersListRepository
+//  {
+//    readonly string _connectionString;
 
-    public UsersListRepository(IConfiguration config)
-    {
-      _connectionString = config.GetConnectionString("Reel-Love");
-    }
+//    public UsersListRepository(IConfiguration config)
+//    {
+//      _connectionString = config.GetConnectionString("Reel-Love");
+//    }
 
-    internal IEnumerable<UsersList> GetAll()
-    {
-      using var db = new SqlConnection(_connectionString);
+//    internal IEnumerable<UsersList> GetAll()
+//    {
+//      using var db = new SqlConnection(_connectionString);
 
-      var sql = @"SELECT * 
-                  FROM UsersList";
+//      var sql = @"SELECT * 
+//                  FROM UsersList";
 
-      var usersList = db.Query<UsersList>(sql);
+//      var usersList = db.Query<UsersList>(sql);
 
-      return usersList;
-    }
+//      return usersList;
+//    }
 
-    internal UsersList getUsersListById(int id)
-    {
-      using var db = new SqlConnection(_connectionString);
-      var sql = @"SELECT * 
-                  FROM UsersList
-                  WHERE id = @Id";
+//    internal UsersList getUsersListById(int id)
+//    {
+//      using var db = new SqlConnection(_connectionString);
+//      var sql = @"SELECT * 
+//                  FROM UsersList
+//                  WHERE id = @Id";
 
-      var usersList = db.QuerySingleOrDefault<UsersList>(sql, new { id });
+//      var usersList = db.QuerySingleOrDefault<UsersList>(sql, new { id });
 
-      return usersList;
-    }
+//      return usersList;
+//    }
 
-    internal UsersList getUsersListByUsersId(int UsersId)
-    {
-      using var db = new SqlConnection(_connectionString);
-      var sql = @"SELECT * 
-                  FROM UsersList
-                  WHERE usersId = @usersId";
+//    internal UsersList getUsersListByUsersId(int UsersId)
+//    {
+//      using var db = new SqlConnection(_connectionString);
+//      var sql = @"SELECT * 
+//                  FROM UsersList
+//                  WHERE usersId = @usersId";
 
-      var usersList = db.QuerySingleOrDefault<UsersList>(sql, new { UsersId });
+//      var usersList = db.QuerySingleOrDefault<UsersList>(sql, new { UsersId });
 
-      return usersList;
-    }
+//      return usersList;
+//    }
 
-    internal UsersList getUsersListByPartnerId(int PartnerId)
-    {
-      using var db = new SqlConnection(_connectionString);
-      var sql = @"SELECT * 
-                  FROM UsersList
-                  WHERE partnerId = @PartnerId";
+//    internal UsersList getUsersListByPartnerId(int PartnerId)
+//    {
+//      using var db = new SqlConnection(_connectionString);
+//      var sql = @"SELECT * 
+//                  FROM UsersList
+//                  WHERE partnerId = @PartnerId";
 
-      var usersList = db.QuerySingleOrDefault<UsersList>(sql, new { PartnerId });
+//      var usersList = db.QuerySingleOrDefault<UsersList>(sql, new { PartnerId });
 
-      return usersList;
-    }
+//      return usersList;
+//    }
 
-    internal void Add(UsersList newUsersList)
-    {
-      using var db = new SqlConnection(_connectionString);
+//    internal void Add(UsersList newUsersList)
+//    {
+//      using var db = new SqlConnection(_connectionString);
 
-      var sql = @"INSERT into UsersList(UsersId, ListTitle, PartnerId)
-                  OUTPUT inserted.Id
-                  VALUES (@UsersId, @ListTitle, @PartnerId)";
+//      var sql = @"INSERT into UsersList(UsersId, ListTitle, PartnerId)
+//                  OUTPUT inserted.Id
+//                  VALUES (@UsersId, @ListTitle, @PartnerId)";
 
-      var Id = db.ExecuteScalar<int>(sql, newUsersList);
+//      var Id = db.ExecuteScalar<int>(sql, newUsersList);
 
-      newUsersList.Id = Id;
-    }
+//      newUsersList.Id = Id;
+//    }
 
-    internal void RemoveUsersList(int Id)
-    {
-      using var db = new SqlConnection(_connectionString);
-      var sql = @"DELETE
-                  FROM UsersList
-                  WHERE Id = @Id";
+//    internal void RemoveUsersList(int Id)
+//    {
+//      using var db = new SqlConnection(_connectionString);
+//      var sql = @"DELETE
+//                  FROM UsersList
+//                  WHERE Id = @Id";
 
-      db.Execute(sql, new { Id });
-    }
+//      db.Execute(sql, new { Id });
+//    }
 
-    internal object Update(int Id, UsersList usersList)
-    {
-      using var db = new SqlConnection(_connectionString);
+//    internal object Update(int Id, UsersList usersList)
+//    {
+//      using var db = new SqlConnection(_connectionString);
 
-      var sql = @"UPDATE UsersList
-                  SET UsersId = @UsersId,
-                      PartnerId = @PartnerId,
-                      ListTitle = @ListTitle
-                  OUTPUT INSERTED.*
-                  WHERE Id = @Id";
+//      var sql = @"UPDATE UsersList
+//                  SET UsersId = @UsersId,
+//                      PartnerId = @PartnerId,
+//                      ListTitle = @ListTitle
+//                  OUTPUT INSERTED.*
+//                  WHERE Id = @Id";
 
-      usersList.Id = Id;
+//      usersList.Id = Id;
 
-      var updatedUsersList = db.QuerySingleOrDefault<UsersList>(sql, usersList);
+//      var updatedUsersList = db.QuerySingleOrDefault<UsersList>(sql, usersList);
 
-      return updatedUsersList;
-    }
-  }
-}
+//      return updatedUsersList;
+//    }
+//  }
+//}

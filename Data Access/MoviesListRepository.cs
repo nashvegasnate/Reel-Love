@@ -65,7 +65,23 @@ namespace Reel_Love.Data_Access
       db.Execute(sql, new { Id });
     }
 
+    //MOVED TO MOVIES REPO
+    //internal MoviesList GetAllMoviesOnAListById(Guid Id)
+    //{
+    //  using var db = new SqlConnection(_connectionString);
 
+    //  var sql = @"select ImdbID, Title, Genre, Runtime, [Year], Poster, Plot
+    //                    from Movies m
+    //                    join ListCommand lc
+    //                    on m.ImdbID = lc.MovieId
+    //                    join MoviesList ml
+    //                    on ml.Id = lc.ListId
+    //                    where ml.Id = ml.Id";
+
+    //  var moviesList = db.QueryFirstOrDefault<MoviesList>(sql, new { Id });
+
+    //  return moviesList;
+    //}
 
     //public IActionResult CreateNewList(ListCommand command)
     //{
@@ -81,16 +97,127 @@ namespace Reel_Love.Data_Access
     //}
 
 
+    //internal void Remove(int ListsId)
+    //{
+    //  using var db = new SqlConnection(_connectionString);
+    //  var sql = @"DELETE
+    //              FROM MoviesList
+    //              WHERE ListsId = @ListsId";
 
+    //  db.Execute(sql, new { ListsId });
+    //}
 
-    internal void Remove(int ListsId)
+    internal MoviesList AddToList(Guid Id, NewList addedMovie)
     {
-      using var db = new SqlConnection(_connectionString);
-      var sql = @"DELETE
-                  FROM MoviesList
-                  WHERE ListsId = @ListsId";
+      var db = new SqlConnection(_connectionString);
 
-      db.Execute(sql, new { ListsId });
+      //We need to find the user, so we can can grab their list
+      var userSql = @"SELECT *
+                    FROM USERS
+                    WHERE Id = @Id";
+
+      var userList = db.QueryFirstOrDefault<User>(userSql, new { Id });
+
+      //Using the user to find their list
+      var listToUpdateSql = @"SELECT *
+                              FROM MoviesList 
+                              WHERE UserId = @UserId";
+
+      var listToUpdate = db.QueryFirstOrDefault<MoviesList>(listToUpdateSql, new { Id });
+
+      var listId = listToUpdate.Id;
+
+      //Now get the movies currently in the list, so we can add to it
+      var currentListItemsSql = @"SELECT *
+                                  FROM ListCommand
+                                  WHERE ListId = @thisQueryParam";
+
+      var currentListDetails = db.Query<ListCommand>(currentListItemsSql, new { thisQueryParam = listId}).ToList();
+
+      //Local list that we are creating to push current items and the new item
+      var currentListOfMovies = new List<NewList>();
+
+      //Add current movies to local list of movies
+      foreach (var currentList in currentListDetails)
+      {
+        var thisMovie = new NewList { MovieId = currentList.MovieId };
+        currentListOfMovies.Add(thisMovie);
+      }
+
+      //Now add the item we are adding to the cart
+      currentListOfMovies.Add(addedMovie);
+
+      //This block of code is resetting the cart based on the cart with the added items
+      //var thisOrderSubtotal = 0m;
+
+      foreach (var listMovie in currentListOfMovies)
+      {
+        //Get the movie from the database 
+        var moviesQuery = @"SELECT *
+                         FROM Movies
+                         WHERE MovieId = @MovieId";
+
+        var listMovieId = listMovie.MovieId;
+
+        var thisMovie = db.QueryFirstOrDefault<Movie>(moviesQuery, new { id = listMovieId});
+
+      }
+
+      //Create a local list to update the list with the new movie
+      var listToReturn = new MoviesList
+      {
+        Id = listToUpdate.Id,
+        UserId = listToUpdate.UserId
+      };
+
+      //Update the list in the database based on new movie
+      var updateListSql = @"UPDATE MoviesList
+                            SET Id = @Id
+                                ,UserId = @UserId
+                             WHERE Id = @Id";
+
+      var theUpdatedList = db.Execute(updateListSql, listToReturn);
+
+      //Now that we have updated the list, save this to return to the user
+      var theFinalList = db.QueryFirstOrDefault<MoviesList>(listToUpdateSql, new { Id });
+
+      //Now we need to update the ListDetails or line items
+      foreach (var listDetailMovie in currentListOfMovies)
+      {
+        //Get the movie per line item
+        var moviesQuery = @"SELECT *
+                         FROM Movie
+                         WHERE MovieId = @id";
+        //*******************IS THIS RIGHT?^^ Or should it be MovieId?????******************
+
+        var listMovieId = listDetailMovie.MovieId;
+
+        var thisMovie = db.QueryFirstOrDefault<Movie>(moviesQuery, new { id = listMovieId });
+
+        //Create a local ListCommand to push to the database. 
+        var createListCommandToCreate = new ListCommand
+        {
+          Id = theFinalList.Id,
+          MovieId = thisMovie.ImdbID,
+          ListId = listDetailMovie.ListId
+         
+        };
+
+        //Only add the newly added movie to List Details
+        var createListCommandSql = @"IF NOT EXISTS(SELECT *
+                                                  FROM ListCommand
+                                                  WHERE Id=@Id AND MovieId=@MovieId)
+                                                  INSERT INTO ListCommand
+                                                  (Id, ListId, MovieId)
+                                              VALUES
+                                                  (@Id, @ListId, @MovieId)";
+
+        //Update the database by adding the added item
+        var resultOfAdd = db.Execute(createListCommandSql, createListCommandToCreate);
+      }
+
+      //And finally return the newly created Cart 
+      return theFinalList;
     }
 
     //internal MoviesList AddMovieToList(int ListsId, NewMovieOnList addedMovie)
@@ -121,7 +248,7 @@ namespace Reel_Love.Data_Access
     //                               WHERE ListsId = @ListsId";
 
     //  var currentListDetails = db.Query<MoviesList>(currentMoviesListSql, new { ListsId }).ToList();
-      
+
     //  //local list that is being created to push current movies and new movie
     //  var currentMoviesList = new List<NewList>
     //}

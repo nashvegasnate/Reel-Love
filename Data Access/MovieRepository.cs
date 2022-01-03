@@ -100,6 +100,22 @@ namespace Reel_Love.Data_Access
       return moviesList;
     }
 
-   
+    internal MoviesList GetAllMoviesOnAListById(Guid Id)
+    {
+      using var db = new SqlConnection(_connectionString);
+
+      var sql = @"select ImdbID, Title, Genre, Runtime, [Year], Poster, Plot
+                        from Movies m
+                        join ListCommand lc
+                        on m.ImdbID = lc.MovieId
+                        join MoviesList ml
+                        on ml.Id = lc.ListId
+                        where ml.Id = ml.Id";
+
+      var moviesList = db.QueryFirstOrDefault<MoviesList>(sql, new { Id });
+
+      return moviesList;
+    }
+
   }
 }

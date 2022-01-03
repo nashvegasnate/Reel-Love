@@ -14,10 +14,12 @@ namespace Reel_Love.Controllers
   public class MoviesController : ControllerBase
   {
     MovieRepository _repo;
+    MoviesListRepository _listRepo;
 
-    public MoviesController(MovieRepository repo)
+    public MoviesController(MovieRepository repo, MoviesListRepository listRepo)
     {
       _repo = repo;
+      _listRepo = listRepo;
     }
 
     [HttpGet]
@@ -52,6 +54,12 @@ namespace Reel_Love.Controllers
 
       return Ok();
     }
+
+    //[HttpGet("/GetAllMoviesOnAListById/{Id}")]
+    //public List<Movie> GetAllMoviesOnAListById(Guid Id)
+    //{
+    //  return _listRepo.GetAllMoviesOnAListById(Id);
+    //}
 
     //--------------NOT ADDED YET--------------
     [HttpGet("getMoviesOnListByListName/{ListName}")]
