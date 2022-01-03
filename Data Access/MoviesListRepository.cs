@@ -18,42 +18,70 @@ namespace Reel_Love.Data_Access
       _connectionString = config.GetConnectionString("Reel-Love");
     }
 
-    internal IEnumerable<MoviesList> GetAll()
+    internal List<MoviesList> GetAll()
     {
       using var db = new SqlConnection(_connectionString);
 
-      var sql = @"SELECT * 
-                  FROM MoviesList";
+      var moviesLists = db.Query<MoviesList>(@"SELECT *
+                                                FROM MoviesList").ToList();
 
-      var moviesList = db.Query<MoviesList>(sql);
-
-      return moviesList;
+      return moviesLists;
     }
 
-    internal MoviesList GetMoviesListById(int id)
+    internal MoviesList GetListById(Guid Id)
     {
       using var db = new SqlConnection(_connectionString);
+
       var sql = @"SELECT *
                   FROM MoviesList
-                  WHERE id = @Id";
+                  WHERE Id = @Id";
 
-      var moviesList = db.QuerySingleOrDefault<MoviesList>(sql, new { id });
+      var moviesList = db.QuerySingleOrDefault<MoviesList>(sql, new { Id });
 
       return moviesList;
     }
 
-    internal void CreateNewMoviesList(MoviesList newMoviesList)
+    internal void CreateNewList(MoviesList newList)
     {
       using var db = new SqlConnection(_connectionString);
 
-      var sql = @"INSERT INTO MoviesList(ListName, ListsId, MoviesId)
-                    output INSERTED.Id
-                    VALUES (@ListName, @ListsId, @MoviesId)";
+      var sql = @"INSERT INTO MoviesList (UserId, PartnerId, ListName)
+                         OUTPUT INSERTED.Id
+                          VALUES (@UserId, @PartnerId, @ListName)";
 
-      var id = db.ExecuteScalar<int>(sql, newMoviesList);
-      newMoviesList.Id = id;
+      var id = db.ExecuteScalar<Guid>(sql, newList);
 
+      newList.Id = id;
+     
     }
+
+    internal void Remove(Guid Id)
+    {
+      using var db = new SqlConnection(_connectionString);
+      var sql = @"DELETE
+                  FROM MoviesList
+                  WHERE Id = @Id";
+
+      db.Execute(sql, new { Id });
+    }
+
+
+
+    //public IActionResult CreateNewList(ListCommand command)
+    //{
+    //  using var db = new SqlConnection(_connectionString);
+
+    //  var sql = @"INSERT INTO MoviesList(UserId, PartnerId, ListName)
+    //                output INSERTED.Id
+    //                VALUES (@UserId, @PartnerId, @ListName)";
+
+    //  var id = db.ExecuteScalar<Guid>(sql, newList);
+    //  newList.Id = id;
+
+    //}
+
+
+
 
     internal void Remove(int ListsId)
     {

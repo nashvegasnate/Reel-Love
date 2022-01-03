@@ -7,9 +7,9 @@ namespace Reel_Love.Models
 {
   public class MoviesList
   {
-    public int Id { get; set; }
-    public int MoviesId { get; set; }
-    public int ListsId { get; set; }
+    public Guid Id { get; set; }
+    public Guid UserId { get; set; }
+    public Guid PartnerId { get; set; }
     public string ListName { get; set; }
   }
 }
