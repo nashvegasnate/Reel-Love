@@ -36,7 +36,7 @@ namespace Reel_Love.Data_Access
     //  return _users.Where(user => user.Id == Id);
     //}
 
-    internal User GetUserById(int Id)
+    internal User GetUserById(Guid Id)
     {
       using var db = new SqlConnection(_connectionString);
 
@@ -54,7 +54,7 @@ namespace Reel_Love.Data_Access
       using var db = new SqlConnection(_connectionString);
 
       var sql = @"SELECT *
-                  FROM User
+                  FROM USERS
                   WHERE FirebaseId = @FirebaseId";
 
       var user = db.QuerySingleOrDefault<User>(sql, new { FirebaseId });
@@ -73,22 +73,23 @@ namespace Reel_Love.Data_Access
     {
       using var db = new SqlConnection(_connectionString);
 
-      var sql = @"INSERT INTO USERS(FirstName, LastName)
+      var sql = @"INSERT INTO USERS(FirstName, LastName, FirebaseId)
                     output INSERTED.Id
-                    VALUES (@FirstName, @LastName)";
+                    VALUES (@FirstName, @LastName, @FirebaseId)";
 
-      var id = db.ExecuteScalar<int>(sql, newUser);
+      var id = db.ExecuteScalar<Guid>(sql, newUser);
       newUser.Id = id;
     }
 
-    internal object UpdateUser(int Id, User user)
+    internal object UpdateUser(Guid Id, User user)
     {
       using var db = new SqlConnection(_connectionString);
 
       var sql = @"Update USERS
                     SET
                     FirstName = @FirstName,
-                    LastName = @LastName
+                    LastName = @LastName,
+                    FirebaseId = @FirebaseId
                   Output Inserted.*
                   Where id= @Id";
 
@@ -98,14 +99,14 @@ namespace Reel_Love.Data_Access
       return updatedUser;
     }
 
-    internal void Remove(int id)
+    internal void Remove(Guid Id)
     {
       using var db = new SqlConnection(_connectionString);
       var sql = @"DELETE
                   FROM Users
                   WHERE Id = @id";
 
-      db.Execute(sql, new { id });
+      db.Execute(sql, new { Id });
     }
   }
 }

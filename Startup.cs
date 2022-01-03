@@ -34,6 +34,7 @@ namespace Reel_Love
       services.AddTransient<MoviesListRepository>();
       services.AddTransient<UserRepository>();
       services.AddTransient<UsersListRepository>();
+      services.AddTransient<ListCommandRepository>();
 
       services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         .AddJwtBearer(options =>

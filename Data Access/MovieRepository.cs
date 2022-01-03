@@ -37,15 +37,39 @@ namespace Reel_Love.Data_Access
       return _movies.Where(Movie => Movie.ImdbID == ImdbID).ToList();
     }
 
-    internal List<Movie> GetMovieById(int Id)
-    {
-      return _movies.Where(Movie => Movie.Id == Id).ToList();
-    }
-
     internal List<Movie> GetMovieByTitle(string Title)
     {
       return _movies.Where(Movie => Movie.Title == Title).ToList();
     }
+
+    internal string Add(Movie movie)
+    {
+      using var db = new SqlConnection(_connectionString);
+
+      var sql = @"INSERT INTO Movies
+                  (ImdbID, Title, Genre, Runtime, Year, Poster, Plot)
+                  VALUES
+                  (@ImdbID, @Title, @Genre, @Runtime, @Year, @Poster, @Plot)";
+
+      var id = db.ExecuteScalar<string>(sql, movie);
+
+      movie.ImdbID = id;
+
+      return id;
+    }
+
+    internal void Remove(string ImdbID)
+    {
+      using var db = new SqlConnection(_connectionString);
+      var sql = @"DELETE
+                  FROM Movies
+                  WHERE ImdbID = @ImdbID";
+
+      db.Execute(sql, new { ImdbID });
+    }
+
+
+    //------------NOT REFACTORED YET------------------
 
     //retrieves list of movies on each list 
     internal IEnumerable<Movie> getMoviesByListsId(int ListsId)
@@ -76,31 +100,6 @@ namespace Reel_Love.Data_Access
       return moviesList;
     }
 
-    internal int Add(Movie movie)
-    {
-      using var db = new SqlConnection(_connectionString);
-
-      var sql = @"INSERT INTO Movies
-                  (ImdbID, Title, Genre, Runtime, Year, Poster, Plot)
-                  OUTPUT INSERTED.Id
-                  VALUES
-                  (@ImdbID, @Title, @Genre, @Runtime, @Year, @Poster, @Plot)";
-
-      var id = db.ExecuteScalar<int>(sql, movie);
-
-      movie.Id = id;
-
-      return id;
-    }
-
-    internal void Remove(string ImdbID)
-    {
-      using var db = new SqlConnection(_connectionString);
-      var sql = @"DELETE
-                  FROM Movies
-                  WHERE ImdbID = @ImdbID";
-
-      db.Execute(sql, new { ImdbID });
-    }
+   
   }
 }

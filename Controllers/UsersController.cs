@@ -29,7 +29,7 @@ namespace Reel_Love.Controllers
     }
 
     [HttpGet("{Id}")]
-    public IActionResult GetUserById(int Id)
+    public IActionResult GetUserById(Guid Id)
     {
       var user = _repo.GetUserById(Id);
 
@@ -68,7 +68,7 @@ namespace Reel_Love.Controllers
 
     [AllowAnonymous]
     [HttpPut("{Id}")]
-    public IActionResult UpdateUser(int Id, User user)
+    public IActionResult UpdateUser(Guid Id, User user)
     {
       var userToUpdate = _repo.GetUserById(Id);
 
@@ -81,9 +81,9 @@ namespace Reel_Love.Controllers
     }
 
     [HttpDelete]
-    public IActionResult DeleteUser(int id)
+    public IActionResult DeleteUser(Guid Id)
     {
-      _repo.Remove(id);
+      _repo.Remove(Id);
 
       return Ok();
     }

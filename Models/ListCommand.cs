@@ -5,11 +5,10 @@ using System.Threading.Tasks;
 
 namespace Reel_Love.Models
 {
-  public class User
+  public class ListCommand
   {
     public Guid Id { get; set; }
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
-    public string FirebaseId { get; set; }
+    public Guid ListId { get; set; }
+    public string MovieId {get; set;}
   }
 }
