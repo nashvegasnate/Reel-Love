@@ -72,19 +72,19 @@ namespace Reel_Love.Data_Access
     //------------NOT REFACTORED YET------------------
 
     //retrieves list of movies on each list 
-    internal IEnumerable<Movie> getMoviesByListsId(int ListsId)
-    {
-      using var db = new SqlConnection(_connectionString);
-      var sql = @"SELECT m.Id, ImdbID, Title, Genre, Runtime, [Year], Poster, Plot
-                  FROM Movies m
-                  JOIN MoviesList ml
-                  ON m.Id = ml.MoviesId
-                  WHERE ml.ListsId = @ListsId";
+    //internal IEnumerable<Movie> getMoviesByListsId(Guid Id)
+    //{
+    //  using var db = new SqlConnection(_connectionString);
+    //  var sql = @"SELECT m.Id, ImdbID, Title, Genre, Runtime, [Year], Poster, Plot
+    //              FROM Movies m
+    //              JOIN MoviesList ml
+    //              ON m.Id = ml.MoviesId
+    //              WHERE ml.Id = @Id";
 
-      var moviesList = db.Query<Movie>(sql, new { ListsId });
+    //  var moviesList = db.Query<Movie>(sql, new { Id });
 
-      return moviesList;
-    }
+    //  return moviesList;
+    //}
 
     internal IEnumerable<Movie> getMoviesOnListByListName(string ListName)
     {

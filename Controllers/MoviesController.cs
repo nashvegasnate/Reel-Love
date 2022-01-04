@@ -70,13 +70,13 @@ namespace Reel_Love.Controllers
       return Ok(moviesList);
     }
 
-    [HttpGet("getMoviesByListsId/{Id}")]
-    public IActionResult GetMoviesByListsId(int Id)
-    {
-      var moviesList = _repo.getMoviesByListsId(Id);
-      if (moviesList is null) return NotFound($"That List Does Not Exist.");
-      return Ok(moviesList);
-    }
+    //[HttpGet("getMoviesByListsId/{Id}")]
+    //public IActionResult GetMoviesByListsId(int Id)
+    //{
+    //  var moviesList = _repo.getMoviesByListsId(Id);
+    //  if (moviesList is null) return NotFound($"That List Does Not Exist.");
+    //  return Ok(moviesList);
+    //}
 
   }
 }

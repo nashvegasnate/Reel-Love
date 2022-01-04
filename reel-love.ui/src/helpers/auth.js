@@ -16,7 +16,7 @@ axios.interceptors.request.use((request) => {
   return Promise.reject(err);
 });
 
-const signInUser = () => {
+const signInUser = (setUser) => {
   const provider = new firebase.auth.GoogleAuthProvider();
   firebase.auth().signInWithPopup(provider).then((user) => {
     if (user.additionalUserInfo?.isNewUser){

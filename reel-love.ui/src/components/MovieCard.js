@@ -7,28 +7,22 @@ import {
 import PropTypes from 'prop-types';
 
 function MovieCard({
-  imdbID,
-  title,
-  genre,
-  runtime,
-  year,
-  poster,
-  plot,
-  setMovie,
-  user
+  user,
+  movie,
+  searchResult
 }) {
-
+//console.warn(searchResult);
   return (
     <div>
       <MovieCard className="movie-card">
         <CardBody>
-          <CardTitle tag="h3">Movie Title: {title}</CardTitle>
-          <CardText>ImdbID: {imdbID}</CardText>
-          <CardText>Genre: {genre}</CardText>
-          <CardText>Runtime: {runtime}</CardText>
-          <CardText>Year: {year}</CardText>
-          <CardText>Poster : {poster}</CardText>
-          <CardText>Plot: {plot}</CardText>
+          <CardTitle tag="h3">Movie Title: {searchResult.Title}</CardTitle>
+          <CardText>ImdbID: {searchResult.imdbID}</CardText>
+          <CardText>Genre: {movie.Genre}</CardText>
+          <CardText>Runtime: {movie.Runtime}</CardText>
+          <CardText>Year: {movie.Year}</CardText>
+          <CardText>Poster : {movie.Poster}</CardText>
+          <CardText>Plot: {movie.Plot}</CardText>
           <CardText>User: {user.userName}</CardText>
         </CardBody>
       </MovieCard>  
@@ -45,7 +39,8 @@ MovieCard.propTypes = {
   poster: PropTypes.any.isRequired,
   plot: PropTypes.any.isRequired,
   setMovie: PropTypes.any.isRequired,
-  user: PropTypes.any
+  user: PropTypes.any,
+  searchResult: PropTypes.any
 };
 
 export default MovieCard;

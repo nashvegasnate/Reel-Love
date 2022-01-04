@@ -2,6 +2,8 @@ import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Home from '../views/Home';
+import SingleMovieView from '../views/SingleMovieView';
+import TitleSearchBar from '../components/TitleSearchBar';
 
 const PrivateRoute = ({
   component: Component,
@@ -22,28 +24,30 @@ PrivateRoute.propTypes = {
   user: PropTypes.any,
 };
 
-function Routes({ user, setMovie }) {
+function Routes({ user, movies, setMovies, list, setList }) {
   return (
     <div>
       <Switch>
         <Route exact path='/' component={() => <Home
           user={user}
-          setMovie={setMovie}
+          setMovies={setMovies}
           />} />
-        {/* <PrivateRoute
-          exact
-          path="/"
-          user={user}
-          component={() => (
-            <ViewName user={user} />
-          )}
-        />
         <PrivateRoute
-          exact
-          path="/"
           user={user}
-          component={() => <ViewNAme user={user} />}
-        /> */}
+          exact path="/moviesSingleView/:movieParam"
+          component={() => <SingleMovieView
+            user={user}
+            movies={movies}
+            setMovies={setMovies}
+          />} />
+        <PrivateRoute
+          user={user}
+          exact path="/titleSearch"
+          component={() => <TitleSearchBar
+            user={user}
+            movies={movies}
+            setMovies={setMovies}
+          />} />
         <Route path="*" component={Home} />
       </Switch>
     </div>
@@ -52,7 +56,7 @@ function Routes({ user, setMovie }) {
 
 Routes.propTypes = {
   user: PropTypes.any,
-  setMovie: PropTypes.any
+  setMovie: PropTypes.func
 };
 
 export default Routes;
