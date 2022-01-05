@@ -22,8 +22,8 @@ function MovieCard({
           <CardText>Genre: {searchResults.Genre}</CardText>
           <CardText>Runtime: {searchResults.Runtime}</CardText>
           <CardText>Year: {searchResults.Year}</CardText>
-          <CardImg id="posterImg" height="auto" width="auto" src={searchResults.Poster}></CardImg>
           <CardText>Plot: {searchResults.Plot}</CardText>
+          <CardImg id="posterImg" height="auto" width="auto" src={searchResults.Poster}></CardImg>
         </CardBody>
       </div>  
     </div>
