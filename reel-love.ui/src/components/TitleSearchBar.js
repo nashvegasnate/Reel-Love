@@ -7,9 +7,9 @@ import getMovieTitle from '../helpers/data/moviesData';
 import MovieCard from '../components/MovieCard';
 
 function TitleSearchBar({ user }) {
-  const [searchResults, setSearchResults] = useState([]);
+  //const [searchResults, setSearchResults] = useState([]);
   // OR should it be an object?
-  //const [searchResults, setSearchResults] = useState({});
+  const [searchResults, setSearchResults] = useState({});
   const [searchTitle, setSearchTitle] = useState('');
 
   // const handleInputChange = (e) => {
@@ -26,9 +26,9 @@ function TitleSearchBar({ user }) {
   const handleSearch = (e) => {
     e.preventDefault();
     getMovieTitle(searchTitle).then((response) => {
-      setSearchResults(response);
+      setSearchResults({...response});
       console.warn(searchResults);
-      //setSearchTitle(''); //clears input fields
+      setSearchTitle(''); //clears input fields
     });
   };
 
@@ -48,22 +48,22 @@ function TitleSearchBar({ user }) {
         <Button type="submit" color="info">Search</Button>
       </Form>
       <div className="movie-container">
-        {searchResults?.map((searchResult) => (
+        {searchResults.imdbID
+        ?
           <MovieCard
-            key={searchResult.ImdbID}
-            imdbID={searchResult.ImdbID}
-            title={searchResult.title}
-            genre={searchResult.genre}
-            runtime={searchResult.runtime}
-            year={searchResult.year}
-            poster={searchResult.poster}
-            plot={searchResult.plot}
+            key={searchResults.ImdbID}
+            imdbID={searchResults.ImdbID}
+            title={searchResults.Title}
+            genre={searchResults.genre}
+            runtime={searchResults.runtime}
+            year={searchResults.year}
+            poster={searchResults.poster}
+            plot={searchResults.plot}
             user={user}
             //setMovies={setMovies}
             searchResults={searchResults}
-            setSearchResults={setSearchResults}
-          />  
-        ))} 
+          /> 
+        : <></>}  
       </div>
     </div>
   );

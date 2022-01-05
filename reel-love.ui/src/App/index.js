@@ -20,7 +20,7 @@ function App() {
         //store the token for later   
         user.getIdToken().then((token) => sessionStorage.setItem("token", token));
           //getUserByFirebaseId(user.Id).then((response) => setUser(response));
-        setUser();
+        setUser(user);
         } else {
         setUser(false);
       }
