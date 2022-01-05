@@ -6,12 +6,11 @@ import {
 import getMovieTitle from '../helpers/data/moviesData';
 import MovieCard from '../components/MovieCard';
 
-function TitleSearchBar() {
-  const [searchTitle, setSearchTitle] = useState('');
-  //const [searchResults, setSearchResults] = useState([]);
+function TitleSearchBar({ user }) {
+  const [searchResults, setSearchResults] = useState([]);
   // OR should it be an object?
-   const [searchResults, setSearchResults] = useState({});
-  
+  //const [searchResults, setSearchResults] = useState({});
+  const [searchTitle, setSearchTitle] = useState('');
 
   // const handleInputChange = (e) => {
   //   setSearchTitle((prevState) => ({
@@ -20,35 +19,18 @@ function TitleSearchBar() {
   //   }));
   // };
 
-  // const handleInputChange = (e) => {
-  //   setSearchTitle(e.target.value);
-  // };
-
-  // const handleSearch = (e) => {
-  //   e.preventDefault();
-  //   getMovieTitle(searchTitle).then((response) => {
-  //     setSearchResult(response);
-  //     console.warn(searchResult);
-  //     setSearchTitle(''); //clears input fields
-  //   });
-  // };
-  const handleApi = () => {
-    getMovieTitle(searchTitle).then((response) => {
-      setSearchResults(response);
-      console.warn(searchResults);
-      setSearchTitle(''); //clears input fields
-    });
-  };
-
   const handleInputChange = (e) => {
     setSearchTitle(e.target.value);
   };
 
   const handleSearch = (e) => {
     e.preventDefault();
-    handleApi();
+    getMovieTitle(searchTitle).then((response) => {
+      setSearchResults(response);
+      console.warn(searchResults);
+      //setSearchTitle(''); //clears input fields
+    });
   };
-  
 
   return (
     <div className="search-form">
@@ -66,7 +48,7 @@ function TitleSearchBar() {
         <Button type="submit" color="info">Search</Button>
       </Form>
       <div className="movie-container">
-        {searchResults.map((searchResult) => (
+        {searchResults?.map((searchResult) => (
           <MovieCard
             key={searchResult.ImdbID}
             imdbID={searchResult.ImdbID}
@@ -76,9 +58,10 @@ function TitleSearchBar() {
             year={searchResult.year}
             poster={searchResult.poster}
             plot={searchResult.plot}
-            //user={user}
+            user={user}
             //setMovies={setMovies}
             searchResults={searchResults}
+            setSearchResults={setSearchResults}
           />  
         ))} 
       </div>
@@ -86,10 +69,10 @@ function TitleSearchBar() {
   );
 }
 
-// TitleSearchBar.propTypes = {
-//   //user: PropTypes.any.isRequired,
-//   movie: PropTypes.array,
-//   setMovies: PropTypes.any
-// };
+TitleSearchBar.propTypes = {
+  user: PropTypes.any.isRequired,
+  movie: PropTypes.array,
+  //setMovies: PropTypes.any
+};
 
 export default TitleSearchBar;

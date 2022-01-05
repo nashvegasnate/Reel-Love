@@ -3,8 +3,8 @@ import firebaseConfig from '../apiKeys';
 
 const dbUrl = firebaseConfig.databaseURL
 
-const getUserByFirebaseId = (id) => new Promise((resolve, reject) => {
-  axios.get(`${dbUrl}/users/user/${id}`)
+const getUserByFirebaseId = (FirebaseId) => new Promise((resolve, reject) => {
+  axios.get(`${dbUrl}/users/user/${FirebaseId}`)
     .then((response) => resolve(response.data))
     .catch((error) => reject(error));
 });

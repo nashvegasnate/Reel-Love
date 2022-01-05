@@ -7,9 +7,11 @@ import NavBar from '../components/NavBar';
 // import getMovieByTitle from '../helpers/data/moviesData';
 // import {signInUser} from '../helpers/auth';
 import './App.scss';
+//import { getUserByFirebaseId } from '../helpers/data/usersData';
 
 function App() {
   const [user, setUser] = useState({});
+  //const [lists, setLists] = useState([]);
   
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
@@ -17,9 +19,9 @@ function App() {
         
         //store the token for later   
         user.getIdToken().then((token) => sessionStorage.setItem("token", token));
-        
-        setUser(user);
-      } else {
+          //getUserByFirebaseId(user.Id).then((response) => setUser(response));
+        setUser();
+        } else {
         setUser(false);
       }
     });
@@ -28,8 +30,12 @@ function App() {
   return (
     <div className="app">
       <Router>
-        <NavBar user={user} setUser={setUser} />
-        <Routes user={user} setUser={setUser} />
+        <NavBar user={user} />
+        <Routes
+        user={user}
+        // lists={lists}
+        // setLists={setLists} 
+        />
       </Router>  
     </div>
   );

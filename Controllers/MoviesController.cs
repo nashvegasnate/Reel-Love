@@ -55,13 +55,7 @@ namespace Reel_Love.Controllers
       return Ok();
     }
 
-    //[HttpGet("/GetAllMoviesOnAListById/{Id}")]
-    //public List<Movie> GetAllMoviesOnAListById(Guid Id)
-    //{
-    //  return _listRepo.GetAllMoviesOnAListById(Id);
-    //}
-
-    //--------------NOT ADDED YET--------------
+    //THIS WORKS!
     [HttpGet("getMoviesOnListByListName/{ListName}")]
     public IActionResult getMoviesOnListByListName(string ListName)
     {
@@ -70,13 +64,23 @@ namespace Reel_Love.Controllers
       return Ok(moviesList);
     }
 
-    //[HttpGet("getMoviesByListsId/{Id}")]
-    //public IActionResult GetMoviesByListsId(int Id)
-    //{
-    //  var moviesList = _repo.getMoviesByListsId(Id);
-    //  if (moviesList is null) return NotFound($"That List Does Not Exist.");
-    //  return Ok(moviesList);
-    //}
+    //THIS WORKS!!
+    [HttpGet("/GetAllMoviesOnAListById/{Id}")]
+    public IActionResult GetAllMoviesOnAListById(Guid Id)
+    {
+      var moviesList = _repo.GetAllMoviesOnAListById(Id);
+      if (moviesList is null) return NotFound($"That List Does Not Exist.");
+      return Ok(moviesList);
+    }
+
+    //THIS WORKS!!
+    [HttpGet("/GetAllMoviesOnAListByUserId/{Id}")]
+    public IActionResult GetAllMoviesOnAListByUserId(Guid Id)
+    {
+      var moviesList = _repo.GetAllMoviesOnAListByUserId(Id);
+      if (moviesList is null) return NotFound($"That List Does Not Exist.");
+      return Ok(moviesList);
+    }
 
   }
 }

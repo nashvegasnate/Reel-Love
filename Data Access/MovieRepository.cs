@@ -86,13 +86,16 @@ namespace Reel_Love.Data_Access
     //  return moviesList;
     //}
 
+    //THIS WORKS!!
     internal IEnumerable<Movie> getMoviesOnListByListName(string ListName)
     {
       using var db = new SqlConnection(_connectionString);
-      var sql = @"SELECT m.Id, ImdbID, Title, Genre, Runtime, [Year], Poster, Plot
+      var sql = @"SELECT ImdbID, Title, Genre, Runtime, [Year], Poster, Plot
                   FROM Movies m
+                  JOIN ListCommand lc
+                  ON m.ImdbID = lc.MovieId
                   JOIN MoviesList ml
-                  ON m.Id = ml.MoviesId
+                  ON ml.Id = lc.ListId
                   WHERE ml.ListName = @ListName";
 
       var moviesList = db.Query<Movie>(sql, new { ListName });
@@ -100,22 +103,44 @@ namespace Reel_Love.Data_Access
       return moviesList;
     }
 
-    internal MoviesList GetAllMoviesOnAListById(Guid Id)
+    //THIS WORKS!!
+    internal IEnumerable<Movie> GetAllMoviesOnAListById(Guid Id)
     {
       using var db = new SqlConnection(_connectionString);
 
-      var sql = @"select ImdbID, Title, Genre, Runtime, [Year], Poster, Plot
-                        from Movies m
-                        join ListCommand lc
-                        on m.ImdbID = lc.MovieId
-                        join MoviesList ml
-                        on ml.Id = lc.ListId
-                        where ml.Id = ml.Id";
+      var sql = @"SELECT ImdbID, Title, Genre, Runtime, [Year], Poster, Plot
+                        FROM Movies m
+                        JOIN ListCommand lc
+                        ON m.ImdbID = lc.MovieId
+                        JOIN MoviesList ml
+                        ON ml.Id = lc.ListId
+                        WHERE ml.Id = @Id";
 
-      var moviesList = db.QueryFirstOrDefault<MoviesList>(sql, new { Id });
+      var moviesList = db.Query<Movie>(sql, new { Id });
 
       return moviesList;
     }
+
+    //THIS WORKS!!
+    internal IEnumerable<Movie> GetAllMoviesOnAListByUserId(Guid Id)
+    {
+      using var db = new SqlConnection(_connectionString);
+
+      var sql = @"SELECT ImdbID, Title, Genre, Runtime, [Year], Poster, Plot
+                        FROM Movies m
+                        JOIN ListCommand lc
+                        ON m.ImdbID = lc.MovieId
+                        JOIN MoviesList ml
+                        ON ml.Id = lc.ListId
+                        JOIN Users u
+                        ON u.Id = ml.UserId
+                        WHERE u.Id = @Id";
+
+      var moviesList = db.Query<Movie>(sql, new { Id });
+
+      return moviesList;
+    }
+
 
   }
 }
