@@ -6,10 +6,10 @@ import {
 import getMovieTitle from '../helpers/data/moviesData';
 import MovieCard from '../components/MovieCard';
 
-function TitleSearchBar({ user, setMovie }) {
-  //const [searchResult, setSearchResult] = useState([]);
+function TitleSearchBar({ user }) {
+  //const [searchResults, setSearchResults] = useState([]);
   // OR should it be an object?
-  const [searchResult, setSearchResult] = useState({});
+  const [searchResults, setSearchResults] = useState({});
   const [searchTitle, setSearchTitle] = useState('');
 
   // const handleInputChange = (e) => {
@@ -26,8 +26,8 @@ function TitleSearchBar({ user, setMovie }) {
   const handleSearch = (e) => {
     e.preventDefault();
     getMovieTitle(searchTitle).then((response) => {
-      console.warn(searchResult);
-      setSearchResult(response);
+      setSearchResults({...response});
+      console.warn(searchResults);
       setSearchTitle(''); //clears input fields
     });
   };
@@ -48,30 +48,31 @@ function TitleSearchBar({ user, setMovie }) {
         <Button type="submit" color="info">Search</Button>
       </Form>
       <div className="movie-container">
-        {searchResult.length > 0
-        && (
+        {searchResults.imdbID
+        ?
           <MovieCard
-            key={searchResult.title}
-            imdbID={searchResult.imdbID}
-            yitle={searchResult.title}
-            genre={searchResult.genre}
-            runtime={searchResult.runtime}
-            year={searchResult.year}
-            poster={searchResult.poster}
-            plot={searchResult.plot}
+            key={searchResults.ImdbID}
+            imdbID={searchResults.ImdbID}
+            title={searchResults.Title}
+            genre={searchResults.genre}
+            runtime={searchResults.runtime}
+            year={searchResults.year}
+            poster={searchResults.poster}
+            plot={searchResults.plot}
             user={user}
-            setMovie={setMovie}
-          />
-        )} 
+            //setMovies={setMovies}
+            searchResults={searchResults}
+          /> 
+        : <></>}  
       </div>
     </div>
   );
 }
 
 TitleSearchBar.propTypes = {
-  user: PropTypes.any,
-  // movie: PropTypes.object,
-  setMovie: PropTypes.any
+  user: PropTypes.any.isRequired,
+  movie: PropTypes.array,
+  //setMovies: PropTypes.any
 };
 
 export default TitleSearchBar;

@@ -40,14 +40,14 @@ namespace Reel_Love
         .AddJwtBearer(options =>
         {
           options.IncludeErrorDetails = true;
-          options.Authority = "https://securetoken.google.com/fish-store-a71e6";
+          options.Authority = "https://securetoken.google.com/reel-love-3001b";
           options.TokenValidationParameters = new TokenValidationParameters
           {
             ValidateLifetime = true,
             ValidateAudience = true,
             ValidateIssuer = true,
-            ValidAudience = "fish-store-a71e6",
-            ValidIssuer = "https://securetoken.google.com/fish-store-a71e6"
+            ValidAudience = "reel-love-3001b",
+            ValidIssuer = "https://securetoken.google.com/reel-love-3001b"
           };
         });
       services.AddControllers();
