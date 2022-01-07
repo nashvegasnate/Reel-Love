@@ -8,10 +8,11 @@ import NavBar from '../components/NavBar';
 // import {signInUser} from '../helpers/auth';
 import './App.scss';
 //import { getUserByFirebaseId } from '../helpers/data/usersData';
+import getLists from '../helpers/data/listsData';
 
 function App() {
   const [user, setUser] = useState({});
-  //const [lists, setLists] = useState([]);
+  const [lists, setLists] = useState([]);
   
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
@@ -21,10 +22,15 @@ function App() {
         user.getIdToken().then((token) => sessionStorage.setItem("token", token));
           //getUserByFirebaseId(user.Id).then((response) => setUser(response));
         setUser(user);
+        getLists(user.uid).then(setLists);
         } else {
         setUser(false);
       }
     });
+  }, []);
+
+  useEffect(() => {
+    getLists(user?.uid).then(setLists);
   }, []);
 
   return (
@@ -33,8 +39,8 @@ function App() {
         <NavBar user={user} />
         <Routes
         user={user}
-        // lists={lists}
-        // setLists={setLists} 
+        lists={lists}
+        setLists={setLists} 
         />
       </Router>  
     </div>
