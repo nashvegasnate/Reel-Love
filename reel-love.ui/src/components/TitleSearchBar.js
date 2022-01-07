@@ -53,7 +53,7 @@ function TitleSearchBar({ user }) {
           <MovieCard
             key={searchResults.ImdbID}
             imdbID={searchResults.ImdbID}
-            title={searchResults.Title}
+            title={searchResults.title}
             genre={searchResults.genre}
             runtime={searchResults.runtime}
             year={searchResults.year}

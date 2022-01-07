@@ -17,7 +17,7 @@ function MovieCard({
     <div>
       <div className="movie-card">
         <CardBody>
-          <CardTitle tag="h3">Movie Title: {searchResults.title}</CardTitle>
+          <CardTitle tag="h3">Movie Title: {searchResults.Title}</CardTitle>
           <CardText>ImdbID: {searchResults.imdbID}</CardText>
           <CardText>Genre: {searchResults.Genre}</CardText>
           <CardText>Runtime: {searchResults.Runtime}</CardText>
