@@ -31,10 +31,10 @@ namespace Reel_Love
     {
       services.AddSingleton<IConfiguration>(Configuration);
       services.AddTransient<MovieRepository>();
-      services.AddTransient<MoviesListRepository>();
-      services.AddTransient<UserRepository>();
+      //services.AddTransient<ListMoviesRepository>();
+      services.AddTransient<MyListRepository>();
       //services.AddTransient<UsersListRepository>();
-      services.AddTransient<ListCommandRepository>();
+      //services.AddTransient<ListMoviesRepository>();
 
       services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         .AddJwtBearer(options =>

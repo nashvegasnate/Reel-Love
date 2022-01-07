@@ -5,9 +5,11 @@
 
 //namespace Reel_Love.Models
 //{
-//  public class NewList
+//  public class ListMovie
 //  {
-//    public string MovieId { get; set; }
+//    public Guid Id { get; set; }
+//    //public NewList MovieList { get; set; }
 //    public Guid ListId { get; set; }
+//    public string MovieId { get; set; }
 //  }
 //}
