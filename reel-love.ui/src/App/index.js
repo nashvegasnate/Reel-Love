@@ -15,15 +15,18 @@ function App() {
   const [lists, setLists] = useState([]);
   
   useEffect(() => {
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {             
-        
-        //store the token for later   
-        user.getIdToken().then((token) => sessionStorage.setItem("token", token));
-          //getUserByFirebaseId(user.Id).then((response) => setUser(response));
-        setUser(user);
-        getLists(user.uid).then(setLists);
-        } else {
+    firebase.auth().onAuthStateChanged((authed) => {
+      if (authed) {
+        const userInfoObj = {
+          fullName: authed.displayName,
+          profileImage: authed.photoURL,
+          uid: authed.uid,
+          user: authed.email.split('@')[0],
+        };
+        getLists().then((listsArray) => setLists(listsArray));
+        setUser(userInfoObj);
+        getLists(authed.uid).then(setLists);
+      } else if (user || user === null) {
         setUser(false);
       }
     });

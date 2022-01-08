@@ -5,7 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Data.SqlClient;
+//using Microsoft.Data.SqlClient;
+using System.Data.SqlClient;
 
 namespace Reel_Love.Data_Access
 {

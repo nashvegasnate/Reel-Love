@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
-import MovieCard from '../components/MovieCard';
+import MovieCard from '../components/Cards/MovieCard';
 import getMovieTitle from '../helpers/data/moviesData';
 
 function SingleMovieView({

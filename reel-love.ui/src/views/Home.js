@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 // import {
 //   CardText,
 //   Button
 // } from 'reactstrap';
 //import { signInUser, signOutUser } from '../helpers/auth';
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 import TitleSearchBar from '../components/TitleSearchBar';
 // import UserInfoCard from '../components/UserInfo';
 
@@ -24,11 +24,11 @@ function Home({ user }) {
   //   </>
   // );
 
-   const history = useHistory();
+  //  const history = useHistory();
 
-   const handlePush = (title) => {
-     history.push(`/moviesSingleView/${title}`);
-   };
+  //  const handlePush = (title) => {
+  //    history.push(`/moviesSingleView/${title}`);
+  //  };
 
   return (
     <div>

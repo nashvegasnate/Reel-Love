@@ -32,7 +32,7 @@ function MovieCard({
 
 MovieCard.propTypes = {
   //imdbID: PropTypes.any.isRequired,
-  title: PropTypes.any.isRequired,
+  title: PropTypes.any,
   // genre: PropTypes.any.isRequired,
   // runtime: PropTypes.any.isRequired,
   // year: PropTypes.any.isRequired,

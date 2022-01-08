@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+//using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.IdentityModel.Tokens;
+//using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Reel_Love.Data_Access;
 using System;
@@ -36,20 +36,20 @@ namespace Reel_Love
       //services.AddTransient<UsersListRepository>();
       //services.AddTransient<ListMoviesRepository>();
 
-      services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-        .AddJwtBearer(options =>
-        {
-          options.IncludeErrorDetails = true;
-          options.Authority = "https://securetoken.google.com/reel-love-3001b";
-          options.TokenValidationParameters = new TokenValidationParameters
-          {
-            ValidateLifetime = true,
-            ValidateAudience = true,
-            ValidateIssuer = true,
-            ValidAudience = "reel-love-3001b",
-            ValidIssuer = "https://securetoken.google.com/reel-love-3001b"
-          };
-        });
+      //services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+      //  .AddJwtBearer(options =>
+      //  {
+      //    options.IncludeErrorDetails = true;
+      //    options.Authority = "https://securetoken.google.com/reel-love-3001b";
+      //    options.TokenValidationParameters = new TokenValidationParameters
+      //    {
+      //      ValidateLifetime = true,
+      //      ValidateAudience = true,
+      //      ValidateIssuer = true,
+      //      ValidAudience = "reel-love-3001b",
+      //      ValidIssuer = "https://securetoken.google.com/reel-love-3001b"
+      //    };
+      //  });
       services.AddControllers();
       services.AddSwaggerGen(c =>
       {

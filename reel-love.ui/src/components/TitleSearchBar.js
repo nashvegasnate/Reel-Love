@@ -4,7 +4,7 @@ import {
   Form, Button, Input, Label
 } from 'reactstrap';
 import getMovieTitle from '../helpers/data/moviesData';
-import MovieCard from '../components/MovieCard';
+import MovieCard from '../components/Cards/MovieCard';
 
 function TitleSearchBar({ user }) {
   //const [searchResults, setSearchResults] = useState([]);
@@ -70,7 +70,7 @@ function TitleSearchBar({ user }) {
 }
 
 TitleSearchBar.propTypes = {
-  user: PropTypes.any.isRequired,
+  user: PropTypes.any,
   movie: PropTypes.array,
   //setMovies: PropTypes.any
 };

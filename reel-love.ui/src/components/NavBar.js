@@ -20,10 +20,10 @@ const NavBar = ({ user }) => {
   const authenticated = () => (
     <>
       <NavItem>
-        <Link className="nav-link" to="/">New List</Link>
+        <Link className="nav-link" to="/home">Home/Search</Link>
       </NavItem>
       <NavItem>
-        <Link className="nav-link" to="/">My Lists</Link>
+        <Link className="nav-link" to="/myListsView">My Lists</Link>
       </NavItem>
     </>
   );

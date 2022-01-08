@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Home from '../views/Home';
 import SingleMovieView from '../views/SingleMovieView';
 import TitleSearchBar from '../components/TitleSearchBar';
+import MyListsView from '../views/MyListsView';
 
 const PrivateRoute = ({
   component: Component,
@@ -24,13 +25,12 @@ PrivateRoute.propTypes = {
   user: PropTypes.any,
 };
 
-function Routes({ user, movies, setMovies, list, setList }) {
+function Routes({ user, lists, setLists, movies, setMovies }) {
   return (
     <div>
       <Switch>
         <Route exact path='/' component={() => <Home
           user={user}
-          setMovies={setMovies}
           />} />
         <PrivateRoute
           user={user}
@@ -48,6 +48,14 @@ function Routes({ user, movies, setMovies, list, setList }) {
             movies={movies}
             setMovies={setMovies}
           />} />
+          <PrivateRoute
+          user={user}
+          exact path="/myListsView"
+          component={() => <MyListsView
+            user={user}
+            lists={lists}
+            setLists={setLists}
+          />} />
         <Route path="*" component={Home} />
       </Switch>
     </div>
@@ -56,7 +64,9 @@ function Routes({ user, movies, setMovies, list, setList }) {
 
 Routes.propTypes = {
   user: PropTypes.any,
-  setMovie: PropTypes.func
+  setMovie: PropTypes.func,
+  setMovies: PropTypes.func,
+  movies: PropTypes.array,
 };
 
 export default Routes;
