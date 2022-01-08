@@ -2,16 +2,17 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
 import MovieCard from '../components/Cards/MovieCard';
-import getMovieTitle from '../helpers/data/moviesData';
+import { getMovieByImdbID } from '../helpers/data/MoviesData';
 
 function SingleMovieView({
-  user, setMovies
+  user
 }) {
   const { movieParam } = useParams();
-  const [movie, setMovie] = useState({});
+  const [movie, setMovie] = useState([]);
 
   useEffect(() => {
-    getMovieTitle(movieParam).then(setMovie);
+    getMovieByImdbID(movieParam).then(setMovie);
+    console.warn(movieParam);
   }, []);
 
   return (
@@ -28,7 +29,7 @@ function SingleMovieView({
         poster={movie[0].poster}
         plot={movie[0].plot}
         user={user}
-        setMovies={setMovies}
+        setMovie={setMovie}
       />
     }
     </div>
@@ -36,9 +37,9 @@ function SingleMovieView({
 }
 
 SingleMovieView.propTypes = {
-  user: PropTypes.any. isRequired,
+  user: PropTypes.any.isRequired,
   movie: PropTypes.array,
-  setMovies: PropTypes.func
+  setMovie: PropTypes.func
 };
 
 export default SingleMovieView;

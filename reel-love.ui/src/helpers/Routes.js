@@ -5,6 +5,7 @@ import Home from '../views/Home';
 import SingleMovieView from '../views/SingleMovieView';
 import TitleSearchBar from '../components/TitleSearchBar';
 import MyListsView from '../views/MyListsView';
+import AllMoviesView from '../views/AllMoviesView';
 
 const PrivateRoute = ({
   component: Component,
@@ -34,7 +35,7 @@ function Routes({ user, lists, setLists, movies, setMovies }) {
           />} />
         <PrivateRoute
           user={user}
-          exact path="/moviesSingleView/:movieParam"
+          exact path='/moviesSingleView/:movieParam'
           component={() => <SingleMovieView
             user={user}
             movies={movies}
@@ -42,7 +43,7 @@ function Routes({ user, lists, setLists, movies, setMovies }) {
           />} />
         <PrivateRoute
           user={user}
-          exact path="/titleSearch"
+          exact path='/titleSearch'
           component={() => <TitleSearchBar
             user={user}
             movies={movies}
@@ -50,13 +51,21 @@ function Routes({ user, lists, setLists, movies, setMovies }) {
           />} />
           <PrivateRoute
           user={user}
-          exact path="/myListsView"
+          exact path='/myListsView'
           component={() => <MyListsView
             user={user}
             lists={lists}
             setLists={setLists}
           />} />
-        <Route path="*" component={Home} />
+           <PrivateRoute
+          user={user}
+          exact path='/allMoviesView'
+          component={() => <AllMoviesView
+            user={user}
+            movies={movies}
+            setMovies={setMovies}
+          />} />
+        <Route path='*' component={Home} />
       </Switch>
     </div>
   );

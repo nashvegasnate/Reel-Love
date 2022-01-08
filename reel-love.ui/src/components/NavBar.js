@@ -25,6 +25,9 @@ const NavBar = ({ user }) => {
       <NavItem>
         <Link className="nav-link" to="/myListsView">My Lists</Link>
       </NavItem>
+      <NavItem>
+        <Link className="nav-link" to="/allMoviesView">My Movies</Link>
+      </NavItem>
     </>
   );
 

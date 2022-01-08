@@ -8,11 +8,15 @@ import NavBar from '../components/NavBar';
 // import {signInUser} from '../helpers/auth';
 import './App.scss';
 //import { getUserByFirebaseId } from '../helpers/data/usersData';
-import getLists from '../helpers/data/listsData';
+import { getLists } from '../helpers/data/ListsData';
 
 function App() {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(null);
   const [lists, setLists] = useState([]);
+  
+  useEffect(() => {
+    getLists().then(setLists);
+  }, []);
   
   useEffect(() => {
     firebase.auth().onAuthStateChanged((authed) => {
@@ -23,17 +27,13 @@ function App() {
           uid: authed.uid,
           user: authed.email.split('@')[0],
         };
-        getLists().then((listsArray) => setLists(listsArray));
+        //getLists().then((listsArray) => setLists(listsArray));
         setUser(userInfoObj);
         getLists(authed.uid).then(setLists);
       } else if (user || user === null) {
         setUser(false);
       }
     });
-  }, []);
-
-  useEffect(() => {
-    getLists(user?.uid).then(setLists);
   }, []);
 
   return (

@@ -1,7 +1,7 @@
 import axios from 'axios';
-//import firebaseConfig from '../apiKeys';
+import firebaseConfig from '../apiKeys';
 
-//const dbURL = firebaseConfig.databaseURL;
+const dbURL = firebaseConfig.databaseURL;
 const corsProxy = 'https://salty-wildwood-25813.herokuapp.com/';
 
 const getMovieTitle = (searchTitle) => new Promise((resolve, reject) => {
@@ -34,5 +34,24 @@ const getMovieTitle = (searchTitle) => new Promise((resolve, reject) => {
 //     .then((response) => resolve(response.data))
 //     .catch((error) => reject(error));
 // });
+const getAllMovies = () => new Promise((resolve, reject) => {
+  axios.get(`${dbURL}/api/movies`)
+    .then((response) => resolve(response.data))
+    .catch((error) => reject(error));
+});
 
-export default getMovieTitle;
+const addMovie = (movieObject) => new Promise((resolve, reject) => {
+  axios.post(`${dbURL}/api/movies`, movieObject)
+    .then(() => {
+      getAllMovies().then((resolve));
+    }).catch((error) => reject(error));
+});
+
+const getMovieByImdbID = (ImdbID) => new Promise((resolve, reject) => {
+  axios.get(`${dbURL}/api/movies/GetMovieByImdbID/${ImdbID}`)
+    .then((response) => resolve(response.data))
+    .catch((error) => reject(error));
+});
+
+export { getMovieTitle, getAllMovies, addMovie, getMovieByImdbID };
+
