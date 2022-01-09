@@ -6,6 +6,7 @@ import SingleMovieView from '../views/SingleMovieView';
 import TitleSearchBar from '../components/TitleSearchBar';
 import MyListsView from '../views/MyListsView';
 import AllMoviesView from '../views/AllMoviesView';
+import SingleListView from '../views/SingleListView';
 
 const PrivateRoute = ({
   component: Component,
@@ -43,6 +44,14 @@ function Routes({
           user={user}
           path='/moviesSingleView/:movieParam'
           component={() => <SingleMovieView
+            user={user}
+            //movies={movies}
+            //setMovies={setMovies}
+          />} />
+           <PrivateRoute
+          user={user}
+          path='/listsSingleView/:listParam'
+          component={() => <SingleListView
             user={user}
             //movies={movies}
             //setMovies={setMovies}

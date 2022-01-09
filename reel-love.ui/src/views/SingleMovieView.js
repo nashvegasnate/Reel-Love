@@ -11,7 +11,7 @@ function SingleMovieView({ user, setMovies }) {
   useEffect(() => {
     getMovieByImdbID(movieParam).then(setMovie);
     console.warn(movieParam);
-  }, [getMovieByImdbID]);
+  }, [movieParam]);
 
   return (
     <div>
