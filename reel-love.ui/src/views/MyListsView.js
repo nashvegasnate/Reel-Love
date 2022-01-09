@@ -18,9 +18,9 @@ function MyListsView({ user }) {
     getLists().then(setLists);
   }, []);
 
-  const handlePush = (Id) => {
-    history.push(`/listsSingleView/${Id}`);
-    console.warn(Id);
+  const handlePush = (id) => {
+    history.push(`/listsSingleView/${id}`);
+    console.warn(id);
   };
 
   return (
@@ -38,9 +38,9 @@ function MyListsView({ user }) {
         && <h3 className="text-center mt-2">No Lists Yet</h3>
       }
       <div className="card-container" id="list-cards">
-        {lists?.map((list, Id) => (
-          <h3 key={Id}>
-            <Button className='mt-3' onClick={() => handlePush(list.Id)}>{list.listName}</Button>
+        {lists?.map((list, id) => (
+          <h3 key={id}>
+            <Button className='mt-3' onClick={() => handlePush(list.id)}>{list.listName}</Button>
           </h3>
           // <ListsCard
           // key={listInfo.Id}

@@ -15,9 +15,9 @@ function AllMoviesView({ user }) {
     getAllMovies().then(setMovies);
   }, []);
 
-  const handlePush = (ImdbID) => {
-    history.push(`/moviesSingleView/${ImdbID}`);
-    console.warn(ImdbID);
+  const handlePush = (imdbID) => {
+    history.push(`/moviesSingleView/${imdbID}`);
+    console.warn(imdbID);
   };
 
   return (
@@ -27,9 +27,9 @@ function AllMoviesView({ user }) {
         && <h3 className="text-center mt-2">No Movies Yet</h3>
         }
         <div className='"movie-container'>
-          {movies.map((movie, ImdbID) => (
-            <h3 key={ImdbID}>
-              <Button className='mt-3' onClick={() => handlePush(movie.ImdbID)}>{movie.title}</Button>
+          {movies.map((movie, imdbID) => (
+            <h3 key={imdbID}>
+              <Button className='mt-3' onClick={() => handlePush(movie.imdbID)}>{movie.title}</Button>
             </h3>
           ))}
         </div>  

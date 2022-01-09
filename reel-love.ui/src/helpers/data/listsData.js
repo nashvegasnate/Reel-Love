@@ -16,4 +16,10 @@ const createList = (listObj) => new Promise((resolve, reject) => {
   .catch((error) => reject(error));
 });
 
-export { getLists, createList };
+const getListById = (Id) => new Promise((resolve, reject) => {
+  axios.get(`${dbURL}/api/mylists/getListById/${Id}`)
+    .then((response) => resolve(response.data))
+    .catch((error) => reject(error));
+});
+
+export { getLists, createList, getListById };
