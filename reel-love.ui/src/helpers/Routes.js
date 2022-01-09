@@ -26,7 +26,13 @@ PrivateRoute.propTypes = {
   user: PropTypes.any,
 };
 
-function Routes({ user, lists, setLists, movies, setMovies }) {
+function Routes({
+  user,
+  lists,
+  setLists,
+  movies,
+  setMovies
+}) {
   return (
     <div>
       <Switch>
@@ -35,11 +41,11 @@ function Routes({ user, lists, setLists, movies, setMovies }) {
           />} />
         <PrivateRoute
           user={user}
-          exact path='/moviesSingleView/:movieParam'
+          path='/moviesSingleView/:movieParam'
           component={() => <SingleMovieView
             user={user}
-            movies={movies}
-            setMovies={setMovies}
+            //movies={movies}
+            //setMovies={setMovies}
           />} />
         <PrivateRoute
           user={user}

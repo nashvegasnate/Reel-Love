@@ -1,17 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   CardText,
   CardBody,
   CardTitle,
-  CardImg
+  CardImg,
+  Button
 } from 'reactstrap';
 import PropTypes from 'prop-types';
 
-function MovieCard({
+const MovieCard = ({
   user,
   movie,
   searchResults
-}) {
+}) => {
+
+  const [editing, setEditing] = useState(false);
+
+  const handleclick = (type) => {
+    switch (type) {
+      case 'edit':
+        setEditing((prevState) => !prevState);
+        break;
+      default:
+        console.warn('No action taken');
+    }
+  };
 
   return (
     <div>
@@ -24,6 +37,10 @@ function MovieCard({
           <CardText>Year: {searchResults.Year}</CardText>
           <CardText>Plot: {searchResults.Plot}</CardText>
           <CardImg id="posterImg" height="auto" width="auto" src={searchResults.Poster}></CardImg>
+          { user
+          ? <Button onClick={() => handleclick('edit') }>Add Movie</Button>
+          : ''
+          }
         </CardBody>
       </div>  
     </div>

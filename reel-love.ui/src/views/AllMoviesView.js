@@ -11,14 +11,14 @@ function AllMoviesView({ user }) {
   const [movies, setMovies ] = useState([]);
   const history = useHistory();
 
+  useEffect(() => {
+    getAllMovies().then(setMovies);
+  }, []);
+
   const handlePush = (ImdbID) => {
     history.push(`/moviesSingleView/${ImdbID}`);
     console.warn(ImdbID);
   };
-
-  useEffect(() => {
-    getAllMovies().then(setMovies);
-  }, []);
 
   return (
     <div className='allMoviesView'><h3>ALL MOVIES</h3>
