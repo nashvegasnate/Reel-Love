@@ -53,5 +53,11 @@ const getMovieByImdbID = (ImdbID) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-export { getMovieTitle, getAllMovies, addMovie, getMovieByImdbID };
+const editMovie = (ImdbID, movieObject) => new Promise((resolve, reject) => {
+  axios.put(`${dbURL}api/movies/${ImdbID}`, movieObject).then(() => {
+    getMovieByImdbID(ImdbID).then(resolve).catch(reject);
+  });
+});
+
+export { getMovieTitle, getAllMovies, addMovie, getMovieByImdbID, editMovie };
 
