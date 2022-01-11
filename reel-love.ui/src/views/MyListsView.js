@@ -4,7 +4,7 @@ import { getLists } from '../helpers/data/ListsData';
 import { useHistory } from 'react-router-dom';
 //import ListsCard from '../components/Cards/ListsCard';
 import PropTypes from 'prop-types';
-import AddListForm from '../components/Forms/AddListForm';
+import ListForm from '../components/Forms/ListForm';
 
 function MyListsView({ user }) {
   const [lists, setLists] = useState([]);
@@ -18,9 +18,9 @@ function MyListsView({ user }) {
     getLists().then(setLists);
   }, []);
 
-  const handlePush = (id) => {
-    history.push(`/listsSingleView/${id}`);
-    console.warn(id);
+  const handlePush = (Id) => {
+    history.push(`/listsSingleView/${Id}`);
+    console.warn(Id);
   };
 
   return (
@@ -30,7 +30,7 @@ function MyListsView({ user }) {
         ? <Button className="m-2 btn-lg" color='primary' onClick={handleClick}>Add A List</Button>
         : <div>
             <Button className="m-2 btn-lg" color='info' onClick={handleClick}>Close</Button>
-            <AddListForm className="justify-content-center mt-3" setLists={setLists} user={user} lists={lists} formTitle={'Add New List'}/>
+            <ListForm className="justify-content-center mt-3" setLists={setLists} user={user} lists={lists} formTitle={'Add New List'}/>
           </div>
       }
       </section>
@@ -40,7 +40,7 @@ function MyListsView({ user }) {
       <div className="card-container" id="list-cards">
         {lists?.map((list, id) => (
           <h3 key={id}>
-            <Button className='mt-3' onClick={() => handlePush(list.id)}>{list.listName}</Button>
+            <Button className='listsButton' onClick={() => handlePush(list.id)}>{list.listName}</Button>
           </h3>
           // <ListsCard
           // key={listInfo.Id}

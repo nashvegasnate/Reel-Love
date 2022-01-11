@@ -32,7 +32,8 @@ function Routes({
   lists,
   setLists,
   movies,
-  setMovies
+  setMovies,
+  imdbID
 }) {
   return (
     <div>
@@ -45,8 +46,9 @@ function Routes({
           path='/moviesSingleView/:movieParam'
           component={() => <SingleMovieView
             user={user}
-            //movies={movies}
-            //setMovies={setMovies}
+            movies={movies}
+            setMovies={setMovies}
+            imdbID={imdbID}
           />} />
            <PrivateRoute
           user={user}
@@ -91,6 +93,7 @@ Routes.propTypes = {
   setMovie: PropTypes.func,
   setMovies: PropTypes.func,
   movies: PropTypes.array,
+  imdbID: PropTypes.string
 };
 
 export default Routes;

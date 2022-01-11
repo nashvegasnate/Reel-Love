@@ -24,14 +24,13 @@ function App() {
     firebase.auth().onAuthStateChanged((authed) => {
       if (authed) {
         const userInfoObj = {
-          fullName: authed.displayName,
-          profileImage: authed.photoURL,
+          userName: authed.displayName,
           uid: authed.uid,
-          user: authed.email.split('@')[0],
         };
+        setUser(userInfoObj);
         getLists().then((listsArray) => setLists(listsArray));
         getAllMovies().then((moviesArray) => setMovies(moviesArray));
-        setUser(userInfoObj);
+        
         //getLists(authed.uid).then(setLists);
       } else if (user || user === null) {
         setUser(false);
