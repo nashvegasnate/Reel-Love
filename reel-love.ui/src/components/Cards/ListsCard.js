@@ -5,7 +5,7 @@ import {
   Button
 } from 'reactstrap';
 import PropTypes from 'prop-types';
-import { deleteList } from '../../helpers/data/ListsData';
+import { deleteList } from '../../helpers/data/listsData';
 import ListForm from '../Forms/ListForm';
 
 function ListsCard({

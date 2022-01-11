@@ -8,8 +8,8 @@ import NavBar from '../components/NavBar';
 // import {signInUser} from '../helpers/auth';
 import './App.scss';
 //import { getUserByFirebaseId } from '../helpers/data/usersData';
-import { getLists } from '../helpers/data/ListsData';
-import { getAllMovies } from '../helpers/data/MoviesData';
+import { getLists } from '../helpers/data/listsData';
+import { getAllMovies } from '../helpers/data/moviesData';
 
 function App() {
   const [user, setUser] = useState(null);

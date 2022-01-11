@@ -8,7 +8,7 @@ import {
   Input,
   Label
 } from 'reactstrap';
-import { addMovie, editMovie } from '../../helpers/data/MoviesData';
+import { addMovie, editMovie } from '../../helpers/data/moviesData';
 //import { propTypes } from 'react-bootstrap/esm/Image';
 
 const MovieForm = ({

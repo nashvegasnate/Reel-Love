@@ -7,7 +7,7 @@ import {
   Button
 } from 'reactstrap';
 import PropTypes from 'prop-types';
-import { addMovie } from '../../helpers/data/MoviesData';
+import { addMovie } from '../../helpers/data/moviesData';
 
 const MovieCard = ({
   searchResults

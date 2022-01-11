@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {
   Form, Button, Input, Label
 } from 'reactstrap';
-import { getMovieTitle } from '../helpers/data/MoviesData';
+import { getMovieTitle } from '../helpers/data/moviesData';
 import MovieCard from '../components/Cards/MovieCard';
 
 function TitleSearchBar({ user }) {

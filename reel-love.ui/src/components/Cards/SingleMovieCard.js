@@ -8,7 +8,7 @@ import {
 } from 'reactstrap';
 import PropTypes from 'prop-types';
 import MovieForm from '../Forms/MovieForm';
-import { deleteMovie } from '../../helpers/data/MoviesData';
+import { deleteMovie } from '../../helpers/data/moviesData';
 
 function SingleMovieCard({
   title,

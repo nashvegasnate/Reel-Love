@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from 'reactstrap';
-import { getLists } from '../helpers/data/ListsData';
+import { getLists } from '../helpers/data/listsData';
 import { useHistory } from 'react-router-dom';
 //import ListsCard from '../components/Cards/ListsCard';
 import PropTypes from 'prop-types';

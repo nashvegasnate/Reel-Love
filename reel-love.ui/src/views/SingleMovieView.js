@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
 import SingleMovieCard from '../components/Cards/SingleMovieCard';
-import { getMovieByImdbID } from '../helpers/data/MoviesData';
+import { getMovieByImdbID } from '../helpers/data/moviesData';
 
 function SingleMovieView({ user, setMovies }) {
   const { movieParam } = useParams();

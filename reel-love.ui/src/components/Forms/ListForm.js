@@ -7,7 +7,7 @@ import {
   Input,
   Label
 } from 'reactstrap';
-import { createList } from '../../helpers/data/ListsData';
+import { createList } from '../../helpers/data/listsData';
 import { useHistory } from 'react-router-dom';
 
 

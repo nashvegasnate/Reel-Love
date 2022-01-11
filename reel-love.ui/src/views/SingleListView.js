@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
 import ListCard from '../components/Cards/ListsCard';
-import { getListById } from '../helpers/data/ListsData';
+import { getListById } from '../helpers/data/listsData';
 //import { getMovieByImdbID } from '../helpers/data/MoviesData';
 
 function SingleListView({ user }) {
