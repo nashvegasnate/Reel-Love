@@ -87,6 +87,24 @@ namespace Reel_Love.Data_Access
 
     }
 
+    internal object UpdateMovie(string ImdbID, Movie movie)
+    {
+      using var db = new SqlConnection(_connectionString);
+      var sql = @"UPDATE Movies
+                  SET Title = @Title,
+                      Genre = @Genre, 
+                      Runtime = @Runtime,
+                      Year = @Year, 
+                      Poster = @Poster,
+                      Plot = @Plot, 
+                      ListId = @ListId
+                  WHERE ImdbID = @ImdbID";
+      movie.ImdbID = ImdbID;
+      var updatedMovie = db.QuerySingleOrDefault<Movie>(sql, movie);
+      return updatedMovie;
+
+    }
+
   }
 }
 
