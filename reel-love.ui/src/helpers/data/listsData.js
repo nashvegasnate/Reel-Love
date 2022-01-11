@@ -11,7 +11,7 @@ const getLists = () => new Promise((resolve, reject) => {
 });
 
 const createList = (listObj) => new Promise((resolve, reject) => {
-  axios.post(`${dbURL}api/mylists`, listObj)
+  axios.post(`${dbURL}/api/mylists`, listObj)
   .then((response) => resolve(response.data))
   .catch((error) => reject(error));
 });
@@ -22,4 +22,10 @@ const getListById = (Id) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-export { getLists, createList, getListById };
+const deleteList = (Id) => new Promise((resolve, reject) => {
+  axios.delete(`${dbURL}/api/mylists/${Id}`)
+    .then(() => getLists().then((listsArray) => resolve(listsArray)))
+    .catch((error) => reject(error));
+});
+
+export { getLists, createList, getListById, deleteList };

@@ -38,7 +38,7 @@ namespace Reel_Love.Controllers
       return Ok(_repo.GetMovieByImdbID(ImdbID));
     }
 
-    [HttpDelete]
+    [HttpDelete("{Id}")]
     public IActionResult DeleteMovie(string ImdbID)
     {
       _repo.Remove(ImdbID);
@@ -54,7 +54,7 @@ namespace Reel_Love.Controllers
       return Created("movies/{movie.ImdbID}", movie);
     }
 
-    [HttpPut]
+    [HttpPut("{ImdbID}")]
     public IActionResult UpdateMovie(string ImdbID, Movie movie)
     {
       var movieToUpdate = _repo.GetMovieByImdbID(ImdbID);

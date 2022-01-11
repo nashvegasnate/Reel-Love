@@ -91,14 +91,14 @@ namespace Reel_Love.Data_Access
     {
       using var db = new SqlConnection(_connectionString);
       var sql = @"UPDATE Movies
-                  SET ImdbID = @ImdbID, 
-                      Title = @Title,
+                  SET Title = @Title,
                       Genre = @Genre, 
                       Runtime = @Runtime,
                       Year = @Year, 
                       Poster = @Poster,
                       Plot = @Plot, 
-                      ListId = @ListId";
+                      ListId = @ListId
+                  WHERE ImdbID = @ImdbID";
       movie.ImdbID = ImdbID;
       var updatedMovie = db.QuerySingleOrDefault<Movie>(sql, movie);
       return updatedMovie;

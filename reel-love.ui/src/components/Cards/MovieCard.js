@@ -10,8 +10,6 @@ import PropTypes from 'prop-types';
 import { addMovie } from '../../helpers/data/MoviesData';
 
 const MovieCard = ({
-  user,
-  movie,
   searchResults
 }) => {
 
