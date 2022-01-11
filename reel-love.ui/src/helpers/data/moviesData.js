@@ -53,26 +53,5 @@ const getMovieByImdbID = (ImdbID) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-  const editMovie = (ImdbID, movieObject) => new Promise((resolve, reject) => {
-    console.warn(`${dbURL}/api/movies/${ImdbID}`);
-    axios.put(`${dbURL}/api/movies/${ImdbID}`, movieObject).then(() => {
-      getMovieByImdbID(ImdbID).then(resolve).catch(reject);
-    });
-  });
-
-// const editMovie = (movieObject) => new Promise((resolve, reject) => {
-//   debugger;
-//   axios.put(`${dbURL}/api/movies/${movieObject.ImdbID}`, movieObject).then(() => {
-//     getMovieByImdbID(movieObject.ImdbID).then(resolve).catch(reject);
-//   });
-// });
-
-const deleteMovie = (ImdbID) => new Promise((resolve, reject) => {
-  axios.delete(`${dbURL}/api/movies/${ImdbID}`)
-    .then(() => {
-      getAllMovies().then((resolve));
-    }).catch((error) => reject(error));
-});
-
-export { getMovieTitle, getAllMovies, addMovie, getMovieByImdbID, editMovie, deleteMovie };
+export { getMovieTitle, getAllMovies, addMovie, getMovieByImdbID };
 
