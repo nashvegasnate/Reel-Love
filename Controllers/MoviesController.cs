@@ -38,7 +38,7 @@ namespace Reel_Love.Controllers
       return Ok(_repo.GetMovieByImdbID(ImdbID));
     }
 
-    [HttpDelete("{Id}")]
+    [HttpDelete]
     public IActionResult DeleteMovie(string ImdbID)
     {
       _repo.Remove(ImdbID);
@@ -53,18 +53,6 @@ namespace Reel_Love.Controllers
 
       return Created("movies/{movie.ImdbID}", movie);
     }
-
-    [HttpPut("{ImdbID}")]
-    public IActionResult UpdateMovie(string ImdbID, Movie movie)
-    {
-      var movieToUpdate = _repo.GetMovieByImdbID(ImdbID);
-      if (movieToUpdate is null) return NotFound($"No Movie With That ImdbID Exists In The Database.");
-
-      var updatedMovie = _repo.UpdateMovie(ImdbID, movie);
-
-      return Ok(updatedMovie);
-    }
-
 
     //[HttpGet("GetMovieByTitle/{Title}")]
     //public List<Movie> GetMovieByTitle(string Title)

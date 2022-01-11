@@ -8,16 +8,12 @@ import {
   Label
 } from 'reactstrap';
 import { createList } from '../../helpers/data/ListsData';
-import { useHistory } from 'react-router-dom';
 
-
-export default function ListForm({ user, formTitle, setLists }) {
+export default function AddListForm({ user, formTitle, setLists }) {
   const [list, setList] = useState({
     listName: '',
-    // uid: user.uid
+    uid: user.uid
   });
-
-  const history = useHistory();
 
   //   // WHEN USING INPUTS, NEED FUNCTION THAT TRACKS CHANGES A USER MAKES:
   const handleInputChange = (e) => {
@@ -27,14 +23,9 @@ export default function ListForm({ user, formTitle, setLists }) {
     }));
   };
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   createList(list, user.uid).then(setLists);
-  // };
   const handleSubmit = (e) => {
     e.preventDefault();
-    createList(list).then((listsArray) => setLists(listsArray));
-    history.push('/myListsView');
+    createList(list, user.uid).then(setLists);
   };
 
   return (
@@ -59,7 +50,7 @@ export default function ListForm({ user, formTitle, setLists }) {
   );
 }
 
-ListForm.propTypes = {
+AddListForm.propTypes = {
   user: PropTypes.any,
   formTitle: PropTypes.string.isRequired,
   setLists: PropTypes.func.isRequired,
